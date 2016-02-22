@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Antiquis</string>
+    <string name="action_settings">Deshabilitar servicio</string>
+    <string name="patient_id_tv">ID SANA Paciente</string>
+    <string name="start_service">Iniciar servicio</string>
+    <string name="stop_service">Parar servicio</string>
+
+    <string name="pacient_name">Nombre del paciente</string>
+    <string name="volume">Relación del radio de la pierna</string>
+    <string name="steps">Pasos</string>
+</resources>
