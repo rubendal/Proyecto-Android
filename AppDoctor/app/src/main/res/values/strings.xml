@@ -11,4 +11,13 @@
     <string name="nombre">Nombre</string>
     <string name="telefono">Telefono</string>
     <string name="edad">Edad</string>
+    <string name="caso_de_emergencia">Contactar en caso de emergencia</string>
+    <string name="ver_graficas">Ver Graficas</string>
+    <string name="mandar_alerta">Mandar Alerta</string>
+    <string name="contactar">Contactar</string>
+    <string name="emergencia_contactar_a">En caso de emergencia contactar a</string>
+    <string name="alerta_enviada">Alerta enviada</string>
+    <string name="enviar">Enviar</string>
+    <string name="alerta">Alerta</string>
+    <string name="paciente_registrado">Paciente registrado</string>
 </resources>

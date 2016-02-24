@@ -19,6 +19,7 @@ public class Graph {
 
     public static void showGraph(final Activity activity, @IdRes final int graphViewValores, @IdRes final int graphViewPasos){
         DB db = new DB(activity.getApplicationContext());
+        db.open();
         ArrayList<Valor> valores = db.getAll();
 
         LinkedList<DataPoint> points = new LinkedList<>();
@@ -75,6 +76,6 @@ public class Graph {
             }
         });
 
-
+        db.close();
     }
 }
