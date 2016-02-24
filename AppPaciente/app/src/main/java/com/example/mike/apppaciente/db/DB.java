@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.mike.apppaciente.Valor;
+
+import java.util.ArrayList;
+
 public class DB {
 
     DBHelper dbHelper;
@@ -15,10 +19,8 @@ public class DB {
     }
 
     public Cursor read(){
-        db = dbHelper.getReadableDatabase();
-
-        return db.query(Definition.Entry.NAME,
-                new String[]{Definition.Entry.ENTRY_ID,Definition.Entry.ENTRY_TIMESTAMP,Definition.Entry.ENTRY_VALUE, Definition.Entry.ENTRY_PASOS},
+        return db.query(DBHelper.NAME,
+                DBHelper.COLUMNAS,
                 null,
                 null,
                 null,
@@ -26,11 +28,30 @@ public class DB {
                 null);
     }
 
+    public ArrayList<Valor> getAll(){
+        Cursor cursor = read();
+
+        ArrayList<Valor> lista = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            lista.add(new Valor(cursor.getInt(2),cursor.getInt(3)));
+        }
+
+        return lista;
+    }
+
     public long insert(int value,int pasos){
-        db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Definition.Entry.ENTRY_VALUE,value);
-        values.put(Definition.Entry.ENTRY_PASOS,pasos);
-        return db.insert(Definition.Entry.NAME,null,values);
+        values.put(DBHelper.ENTRY_VALUE,value);
+        values.put(DBHelper.ENTRY_PASOS,pasos);
+        return db.insert(DBHelper.NAME, null, values);
+    }
+
+    public void open(){
+        db = dbHelper.getReadableDatabase();
+    }
+
+    public void close(){
+        db.close();
     }
 }

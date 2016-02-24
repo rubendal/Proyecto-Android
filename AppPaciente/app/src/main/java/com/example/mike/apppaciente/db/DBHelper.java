@@ -6,19 +6,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper{
 
+    public static final String NAME = "register";
+    public static final String ENTRY_ID = "id";
+    public static final String ENTRY_TIMESTAMP = "timestamp";
+    public static final String ENTRY_VALUE = "value";
+    public static final String ENTRY_PASOS = "pasos";
+
+    public static final String[] COLUMNAS = {ENTRY_ID, ENTRY_TIMESTAMP, ENTRY_VALUE, ENTRY_PASOS};
+
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + Definition.Entry.NAME + " (" +
-                    Definition.Entry.ENTRY_ID + " INTEGER PRIMARY KEY," +
-                    Definition.Entry.ENTRY_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                    Definition.Entry.ENTRY_VALUE + " INT," +
-                    Definition.Entry.ENTRY_PASOS + " INT)";
+            "CREATE TABLE " + NAME + " (" +
+                    ENTRY_ID + " INTEGER PRIMARY KEY," +
+                    ENTRY_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                    ENTRY_VALUE + " INT," +
+                    ENTRY_PASOS + " INT)";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + Definition.Entry.NAME;
+            "DROP TABLE IF EXISTS " + NAME;
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "registers.sqlite";
+    public static final String DATABASE_NAME = "registros.sqlite";
 
     public DBHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);

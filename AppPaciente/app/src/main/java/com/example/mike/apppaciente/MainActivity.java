@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, GraficasActivity.class));
     }
 
+    public void activityEmergencia(View view){
+        startActivity(new Intent(MainActivity.this, EmergenciaActivity.class));
+    }
+
 }
