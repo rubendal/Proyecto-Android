@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListaPacientesActivity extends ListActivity {
 
@@ -16,13 +20,31 @@ public class ListaPacientesActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pacientes);
 
-        //Contenido estatico
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id_doctor", Integer.toString(Sesion.ID));
+        String json = HttpHandler.sendPostRequest(this, "http://192.168.100.17/doctor/pacientes.php", params , "Obteniendo lista");
+
         ArrayList<Paciente> pacientes = new ArrayList<>();
-        pacientes.add(new Paciente("Pablo","5511223344",78,0,"Rodrigo","5512345678"));
-        pacientes.add(new Paciente("Laura","5511111111",82,0,"Jose","5512572301"));
-        pacientes.add(new Paciente("Erick","5511222222",73,0,"Angel","5538940923"));
 
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject data = jsonArray.getJSONObject(i);
+                int id = data.getInt("id");
+                String nombre = data.getString("nombre");
+                String telefono = data.getString("telefono");
+                int edad = data.getInt("edad");
+                int genero = data.getInt("genero");
+                String contacto_emergencia = data.getString("contacto_emergencia");
+                String telefono_emergencia = data.getString("telefono_emergencia");
 
+                Paciente paciente = new Paciente(nombre,telefono,edad,genero,contacto_emergencia,telefono_emergencia);
+                paciente.setId(id);
+                pacientes.add(paciente);
+            }
+        }catch(Exception e){
+            finish();
+        }
         setListAdapter(new PacienteAdapter(this,pacientes));
     }
 

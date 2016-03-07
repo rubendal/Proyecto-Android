@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,8 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Ahorita no hay comprobación de sesión
 
-        Intent i = new Intent(this, InicioActivity.class);
-        startActivity(i);
-        finish();
+        EditText username = (EditText) findViewById(R.id.usuario);
+        EditText pass = (EditText) findViewById(R.id.password);
+
+        if(Sesion.iniciarSesion( this , username.getText().toString(), pass.getText().toString())) {
+            Intent i = new Intent(this, InicioActivity.class);
+            startActivity(i);
+            finish();
+        }else{
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
     }
 }

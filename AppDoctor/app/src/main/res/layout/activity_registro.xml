@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/contacto"
         android:hint="@string/nombre"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -102,25 +102,25 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/telefono_contacto"
         android:hint="@string/telefono"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/contacto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignRight="@+id/contacto"
+        android:layout_alignEnd="@+id/contacto" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registrar_paciente"
         android:id="@+id/registrar_paciente"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/telefono_contacto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="74dp"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2"
+        android:layout_alignRight="@+id/telefono_contacto"
+        android:layout_alignEnd="@+id/telefono_contacto"
         android:onClick="registrarPaciente"/>
 
 </RelativeLayout>
