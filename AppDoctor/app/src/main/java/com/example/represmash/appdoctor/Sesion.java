@@ -17,16 +17,19 @@ public class Sesion {
         HashMap<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
-        String response = HttpHandler.sendPostRequest(activity, "http://192.168.100.17/doctor/login.php", params, "Iniciando sesión");
+        try {
+            String response = new PostAsyncTask(activity, params, "Iniciando sesión").execute("http://192.168.100.17/doctor/login.php").get();
 
 
+            try {
+                int id = Integer.parseInt(response);
+                if (id != -1) {
+                    Sesion.username = username;
+                    Sesion.ID = id;
+                    return true;
+                }
+            } catch (Exception e) {
 
-        try{
-            int id = Integer.parseInt(response);
-            if(id != -1){
-                Sesion.username = username;
-                Sesion.ID = id;
-                return true;
             }
         }catch(Exception e){
 

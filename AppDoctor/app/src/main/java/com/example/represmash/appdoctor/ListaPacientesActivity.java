@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -22,25 +23,28 @@ public class ListaPacientesActivity extends ListActivity {
 
         HashMap<String, String> params = new HashMap<>();
         params.put("id_doctor", Integer.toString(Sesion.ID));
-        String json = HttpHandler.sendPostRequest(this, "http://192.168.100.17/doctor/pacientes.php", params , "Obteniendo lista");
-
         ArrayList<Paciente> pacientes = new ArrayList<>();
-
         try {
-            JSONArray jsonArray = new JSONArray(json);
-            for(int i=0;i<jsonArray.length();i++){
-                JSONObject data = jsonArray.getJSONObject(i);
-                int id = data.getInt("id");
-                String nombre = data.getString("nombre");
-                String telefono = data.getString("telefono");
-                int edad = data.getInt("edad");
-                int genero = data.getInt("genero");
-                String contacto_emergencia = data.getString("contacto_emergencia");
-                String telefono_emergencia = data.getString("telefono_emergencia");
+            String json = new PostAsyncTask(this, params, "Obteniendo lista").execute("http://192.168.100.17/doctor/pacientes.php").get();
 
-                Paciente paciente = new Paciente(nombre,telefono,edad,genero,contacto_emergencia,telefono_emergencia);
-                paciente.setId(id);
-                pacientes.add(paciente);
+            try {
+                JSONArray jsonArray = new JSONArray(json);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject data = jsonArray.getJSONObject(i);
+                    int id = data.getInt("id");
+                    String nombre = data.getString("nombre");
+                    String telefono = data.getString("telefono");
+                    int edad = data.getInt("edad");
+                    int genero = data.getInt("genero");
+                    String contacto_emergencia = data.getString("contacto_emergencia");
+                    String telefono_emergencia = data.getString("telefono_emergencia");
+
+                    Paciente paciente = new Paciente(nombre, telefono, edad, genero, contacto_emergencia, telefono_emergencia);
+                    paciente.setId(id);
+                    pacientes.add(paciente);
+                }
+            } catch (Exception e) {
+                finish();
             }
         }catch(Exception e){
             finish();
