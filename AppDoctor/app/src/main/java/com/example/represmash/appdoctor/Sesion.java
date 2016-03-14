@@ -18,7 +18,7 @@ public class Sesion {
         params.put("username", username);
         params.put("password", password);
         try {
-            String response = new PostAsyncTask(activity, params, "Iniciando sesión").execute(Servidor.Direccion() + "/doctor/login.php").get();
+            String response = new PostAsyncTask(activity, params, "Iniciando sesión").execute(Servidor.Direccion("/doctor/login.php")).get();
 
 
             try {

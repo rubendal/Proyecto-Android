@@ -78,6 +78,10 @@ public class Paciente implements Serializable{
         this.id = id;
     }
 
+    public boolean isComplete(){
+        return !nombre.isEmpty() && !telefono.isEmpty() && !nombre_emergencia.isEmpty() && !telefono_emergencia.isEmpty() && edad != 0;
+    }
+
     public HashMap<String, String> generatePOSTParams(int id_doctor){
         HashMap<String, String> params = new HashMap<>();
         params.put("nombre",nombre);
