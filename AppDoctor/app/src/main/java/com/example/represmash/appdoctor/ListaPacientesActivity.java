@@ -25,7 +25,7 @@ public class ListaPacientesActivity extends ListActivity {
         params.put("id_doctor", Integer.toString(Sesion.ID));
         ArrayList<Paciente> pacientes = new ArrayList<>();
         try {
-            String json = new PostAsyncTask(this, params, "Obteniendo lista").execute("http://192.168.100.17/doctor/pacientes.php").get();
+            String json = new PostAsyncTask(this, params, "Obteniendo lista").execute(Servidor.Direccion() + "/doctor/pacientes.php").get();
 
             try {
                 JSONArray jsonArray = new JSONArray(json);

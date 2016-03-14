@@ -40,7 +40,7 @@ public class RegistroActivity extends AppCompatActivity {
                 Integer.parseInt(edad.getText().toString()),g,contacto.getText().toString(), telefonoContacto.getText().toString());
 
         try{
-            String res = new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente").execute("http://192.168.100.17/doctor/registro.php").get();
+            String res = new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente").execute(Servidor.Direccion() + "/doctor/registro.php").get();
             int i = Integer.parseInt(res);
             if(i!=-1){
                 Toast.makeText(this, R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
