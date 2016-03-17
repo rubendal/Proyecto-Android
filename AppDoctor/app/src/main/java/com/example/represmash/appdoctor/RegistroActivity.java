@@ -36,23 +36,27 @@ public class RegistroActivity extends AppCompatActivity {
                 g=1;
                 break;
         }
-        Paciente paciente = new Paciente(nombre.getText().toString(), telefono.getText().toString(),
-                Integer.parseInt(edad.getText().toString()),g,contacto.getText().toString(), telefonoContacto.getText().toString());
+        try {
+            Paciente paciente = new Paciente(nombre.getText().toString(), telefono.getText().toString(),
+                    Integer.parseInt(edad.getText().toString()), g, contacto.getText().toString(), telefonoContacto.getText().toString());
 
-        if(paciente.isComplete()) {
-            try {
-                String res = new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente").execute(Servidor.Direccion("/doctor/registro.php")).get();
-                int i = Integer.parseInt(res);
-                if (i != -1) {
-                    Toast.makeText(this, R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
+            if (paciente.isComplete()) {
+                try {
+                    String res = new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente").execute(Servidor.Direccion("/doctor/registro.php")).get();
+                    int i = Integer.parseInt(res);
+                    if (i != -1) {
+                        Toast.makeText(this, R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
                     Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e) {
-                Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.faltan_datos, Toast.LENGTH_SHORT).show();
             }
-        }else{
+        }catch(Exception e){
             Toast.makeText(this, R.string.faltan_datos, Toast.LENGTH_SHORT).show();
         }
 
