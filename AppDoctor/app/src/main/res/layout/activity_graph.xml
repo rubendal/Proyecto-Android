@@ -9,23 +9,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.represmash.appdoctor.GraphActivity">
 
-    <com.jjoe64.graphview.GraphView
+
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/view"
+        android:id="@+id/graph"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="239dp"
         android:layout_alignParentBottom="true" />
 
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/view2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="265dp"
-        android:layout_alignParentTop="true" />
 </RelativeLayout>

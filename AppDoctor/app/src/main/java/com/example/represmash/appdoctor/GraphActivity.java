@@ -24,7 +24,7 @@ public class GraphActivity extends AppCompatActivity {
 
         db.close();
 
-        Graph.showGraph(this,R.id.view,R.id.view2);
+        Graph.showGraph(this,R.id.graph);
 
     }
 }
