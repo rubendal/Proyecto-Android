@@ -1,6 +1,10 @@
 package com.example.represmash.appdoctor;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +46,9 @@ public class MenuActivity extends AppCompatActivity {
     public void llamar(View v){
 
         //Llamar al telefono del paciente
-
-        Toast.makeText(this, String.format("%s %s","Hacer llamada a: ",paciente.getTelefono()),Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + paciente.getTelefono()));
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(i);
+        }
     }
 }
