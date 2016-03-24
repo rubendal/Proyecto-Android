@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `android` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `android`;
 -- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: android
@@ -16,6 +14,31 @@ USE `android`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `alerta`
+--
+
+DROP TABLE IF EXISTS `alerta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alerta` (
+  `id_paciente` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `alerta` varchar(200) NOT NULL,
+  `vista` int(11) NOT NULL,
+  PRIMARY KEY (`id_paciente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alerta`
+--
+
+LOCK TABLES `alerta` WRITE;
+/*!40000 ALTER TABLE `alerta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alerta` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `doctores`
@@ -64,7 +87,7 @@ CREATE TABLE `pacientes` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_pacientes_1_idx` (`id_doctor`),
   CONSTRAINT `fk_pacientes_1` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,8 +96,35 @@ CREATE TABLE `pacientes` (
 
 LOCK TABLES `pacientes` WRITE;
 /*!40000 ALTER TABLE `pacientes` DISABLE KEYS */;
-INSERT INTO `pacientes` VALUES (1,'Paciente','5511223344',80,0,'Contacto','5500000000',1);
+INSERT INTO `pacientes` VALUES (1,'Paciente','5511223344',80,0,'Contacto','5500000000',1),(2,'ufkcuf','386062738',56,1,'gxufjfjf','98982585',1);
 /*!40000 ALTER TABLE `pacientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `valores`
+--
+
+DROP TABLE IF EXISTS `valores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `valores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_paciente` int(11) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  `timestamp_servidor` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `valor` int(11) NOT NULL,
+  `pasos` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `valores`
+--
+
+LOCK TABLES `valores` WRITE;
+/*!40000 ALTER TABLE `valores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `valores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -86,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-07  8:46:58
+-- Dump completed on 2016-03-23 22:02:47
