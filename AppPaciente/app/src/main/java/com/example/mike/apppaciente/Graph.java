@@ -1,76 +1,68 @@
 package com.example.mike.apppaciente;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.IdRes;
 
 import com.example.mike.apppaciente.db.*;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Graph {
 
-    public static void showGraph(final Activity activity, @IdRes final int graphViewValores, @IdRes final int graphViewPasos){
+    public static void showGraph(final Activity activity, @IdRes final int graph){
         DB db = new DB(activity.getApplicationContext());
         db.open();
         ArrayList<Valor> valores = db.getAll();
 
-        LinkedList<DataPoint> points = new LinkedList<>();
-        for(int i=0;i<valores.size();i++){
-            try{
-                //java.util.Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dates.get(i));
-                //date.setHours(date.getHours() - 6);
-                points.add(new DataPoint(i, valores.get(i).getValor()));
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+        LineChart lineChart = (LineChart)activity.findViewById(graph);
+
+        lineChart.setDescription("");
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setPinchZoom(true);
+
+        ArrayList<String> x = new ArrayList<>();
+
+        ArrayList<Entry> y1 = new ArrayList<>();
+        ArrayList<Entry> y2 = new ArrayList<>();
+        for (int i = 0; i < valores.size(); i++) {
+            x.add(Integer.toString(i + 1));
+            y1.add(new Entry(valores.get(i).getValor(),i+1));
+            y2.add(new Entry(valores.get(i).getPasos(), i + 1));
+
         }
 
-        LinkedList<DataPoint> pointsp = new LinkedList<>();
-        for(int i=0;i<valores.size();i++){
-            try{
-                //java.util.Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dates.get(i));
-                //date.setHours(date.getHours() - 6);
-                pointsp.add(new DataPoint(i, valores.get(i).getPasos()));
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        }
+        LineDataSet set1 = new LineDataSet(y1, "Valores");
+        LineDataSet set2 = new LineDataSet(y2, "Pasos");
 
-        DataPoint[] p = new DataPoint[points.size()];
-        for(int i=0;i<p.length;i++){
-            p[i] = points.get(i);
-        }
-        final LineGraphSeries<DataPoint> series = new LineGraphSeries<>(p);
+        set1.setColor(Color.RED);
+        set1.setCircleColor(Color.RED);
+        set1.setLineWidth(2f);
+        set1.setCircleRadius(3f);
+        set1.setFillAlpha(65);
+        set1.setDrawCircleHole(false);
 
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                GraphView graph = (GraphView) activity.findViewById(graphViewValores);
-                graph.addSeries(series);
-                graph.getGridLabelRenderer().setNumHorizontalLabels(4);
-            }
-        });
+        set2.setColor(Color.BLUE);
+        set2.setCircleColor(Color.BLUE);
+        set2.setLineWidth(2f);
+        set2.setCircleRadius(3f);
+        set2.setFillAlpha(65);
+        set2.setDrawCircleHole(false);
 
-
-
-        DataPoint[] p2 = new DataPoint[pointsp.size()];
-        for(int i=0;i<p2.length;i++){
-            p2[i] = pointsp.get(i);
-        }
-        final LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(p2);
-
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                GraphView graphp = (GraphView) activity.findViewById(graphViewPasos);
-                graphp.addSeries(series2);
-                graphp.getGridLabelRenderer().setNumHorizontalLabels(4);
-            }
-        });
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+        dataSets.add(set2);
+        LineData data = new LineData(x, dataSets);
+        lineChart.setData(data);
 
         db.close();
     }

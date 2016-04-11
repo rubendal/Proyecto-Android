@@ -24,7 +24,7 @@ public class GraficasActivity extends AppCompatActivity {
 
         db.close();
 
-        Graph.showGraph(this,R.id.graph,R.id.pasos);
+        Graph.showGraph(this,R.id.graph);
 
     }
 }

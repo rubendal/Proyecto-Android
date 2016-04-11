@@ -9,37 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mike.apppaciente.GraficasActivity">
 
-    <TextView
+    <com.github.mikephil.charting.charts.LineChart
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/volume"
-        android:id="@+id/nameTextView" />
-
-    <!--android:layout_below="@+id/nameTextView"-->
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
         android:id="@+id/graph"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/nameTextView"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/graph"
-        android:text="@string/steps"
-        android:id="@+id/steps" />
-
-    <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:id="@+id/pasos"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/graph"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

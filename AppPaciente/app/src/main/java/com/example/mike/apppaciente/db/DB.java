@@ -34,7 +34,7 @@ public class DB {
         ArrayList<Valor> lista = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            lista.add(new Valor(cursor.getInt(2),cursor.getInt(3)));
+            lista.add(new Valor(cursor.getInt(2),cursor.getInt(3),cursor.getString(1)));
         }
 
         return lista;
@@ -47,6 +47,14 @@ public class DB {
         return db.insert(DBHelper.NAME, null, values);
     }
 
+    public long insertWithTimestamp(int value,int pasos,String timestamp){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.ENTRY_VALUE,value);
+        values.put(DBHelper.ENTRY_PASOS,pasos);
+        values.put(DBHelper.ENTRY_TIMESTAMP,timestamp);
+        return db.insert(DBHelper.NAME, null, values);
+    }
+
     public void open(){
         db = dbHelper.getReadableDatabase();
     }
@@ -54,4 +62,5 @@ public class DB {
     public void close(){
         db.close();
     }
+
 }
