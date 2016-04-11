@@ -35,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void verGraficas(View v){
         //Descargar graficas
-        DBServer.download(this);
+        DBServer.download(this,paciente);
 
         Intent i = new Intent(this, GraphActivity.class);
         i.putExtra("paciente",paciente);

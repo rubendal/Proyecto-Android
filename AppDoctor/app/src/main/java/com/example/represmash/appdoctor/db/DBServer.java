@@ -2,6 +2,7 @@ package com.example.represmash.appdoctor.db;
 
 import android.app.Activity;
 
+import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
 import com.example.represmash.appdoctor.Servidor;
 import com.example.represmash.appdoctor.Sesion;
@@ -31,7 +32,7 @@ public class DBServer {
     }
 
     //AppDoctor
-    public static void download(Activity activity){
+    public static void download(Activity activity,Paciente paciente){
         DB db = new DB(activity);
 
         db.open();
@@ -39,7 +40,7 @@ public class DBServer {
         ArrayList<Valor> valores = db.getAll();
 
         try{
-            String res = new PostAsyncTask(activity, Sesion.sesionParams(), "", false).execute(Servidor.Direccion("/doctor/descargar.php")).get();
+            String res = new PostAsyncTask(activity, paciente.generatePOSTID(), "", false).execute(Servidor.Direccion("/doctor/descargar.php")).get();
 
             //Leemos json y comparamos si timestamp, valor y pasos son iguales
             JSONArray json = new JSONArray(res);

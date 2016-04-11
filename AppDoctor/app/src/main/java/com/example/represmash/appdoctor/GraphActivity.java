@@ -12,7 +12,7 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        DB db = new DB(this);
+        /*DB db = new DB(this);
         db.open();
 
         //Datos de prueba
@@ -22,8 +22,9 @@ public class GraphActivity extends AppCompatActivity {
         db.insert(102,3);
         db.insert(111,30);
 
-        db.close();
+        db.close();*/
 
+        //Graph.showGraph usa la base de datos
         Graph.showGraph(this,R.id.graph);
 
     }

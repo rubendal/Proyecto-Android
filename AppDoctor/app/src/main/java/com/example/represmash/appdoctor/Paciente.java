@@ -93,4 +93,10 @@ public class Paciente implements Serializable{
         params.put("id_doctor", Integer.toString(id_doctor));
         return params;
     }
+
+    public HashMap<String, String> generatePOSTID(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id_paciente",String.valueOf(id));
+        return params;
+    }
 }
