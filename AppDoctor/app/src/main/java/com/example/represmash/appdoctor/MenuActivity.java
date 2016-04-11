@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.represmash.appdoctor.db.DBServer;
+
 public class MenuActivity extends AppCompatActivity {
 
     private Paciente paciente;
@@ -32,6 +34,9 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void verGraficas(View v){
+        //Descargar graficas
+        DBServer.download(this);
+
         Intent i = new Intent(this, GraphActivity.class);
         i.putExtra("paciente",paciente);
         startActivity(i);

@@ -36,4 +36,10 @@ public class Sesion {
         }
         return false;
     }
+
+    public static HashMap<String, String> sesionParams(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id_doctor", Integer.toString(ID));
+        return params;
+    }
 }

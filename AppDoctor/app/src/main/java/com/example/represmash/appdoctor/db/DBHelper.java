@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper{
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + NAME + " (" +
                     ENTRY_ID + " INTEGER PRIMARY KEY," +
-                    ENTRY_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                    ENTRY_TIMESTAMP + " TIMESTAMP DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime'))," +
                     ENTRY_VALUE + " INT," +
                     ENTRY_PASOS + " INT)";
 

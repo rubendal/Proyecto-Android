@@ -24,6 +24,7 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
     private Activity activity;
     private HashMap<String, String> postParams;
     private String title;
+    private boolean conDialog;
 
     private ProgressDialog dialog;
 
@@ -31,6 +32,15 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
         this.activity = activity;
         this.postParams = postParams;
         this.title = title;
+        conDialog = true;
+        dialog = new ProgressDialog(activity);
+    }
+
+    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, String title, boolean conDialog) {
+        this.activity = activity;
+        this.postParams = postParams;
+        this.title = title;
+        this.conDialog = conDialog;
         dialog = new ProgressDialog(activity);
     }
 
@@ -39,7 +49,9 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
         super.onPreExecute();
         dialog.setTitle(title);
         dialog.setCancelable(false);
-        dialog.show();
+        if(conDialog) {
+            dialog.show();
+        }
     }
 
     @Override
@@ -94,7 +106,9 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        dialog.dismiss();
+        if(conDialog) {
+            dialog.dismiss();
+        }
     }
 
     private static String generarPOST(HashMap<String,String> params){
