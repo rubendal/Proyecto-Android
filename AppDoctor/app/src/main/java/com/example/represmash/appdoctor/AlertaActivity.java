@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
-public class AlertaActivity extends AppCompatActivity {
+public class AlertaActivity extends AppCompatActivity implements AsyncMethodActivity {
 
     private Paciente paciente;
     private EditText alerta;
@@ -27,8 +27,13 @@ public class AlertaActivity extends AppCompatActivity {
         HashMap<String,String> params = new HashMap<>();
         params.put("paciente", paciente.getId() + "");
         params.put("alerta", alerta.getText().toString());
-        try {
-            String res = new PostAsyncTask(this, params, "Enviando alerta").execute(Servidor.Direccion("/doctor/alerta.php")).get();
+        new PostAsyncTask(this, params, "Enviando alerta",this).execute(Servidor.Direccion("/doctor/alerta.php"));
+
+    }
+
+    @Override
+    public void Haz(String res) {
+        try{
             int i = Integer.parseInt(res);
             if (i != -1) {
                 Toast.makeText(this, R.string.alerta_enviada,Toast.LENGTH_SHORT).show();
@@ -39,6 +44,5 @@ public class AlertaActivity extends AppCompatActivity {
         }catch(Exception e){
             Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
         }
-
     }
 }

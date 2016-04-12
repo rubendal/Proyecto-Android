@@ -40,9 +40,9 @@ public class Graph {
         ArrayList<Entry> y1 = new ArrayList<>();
         ArrayList<Entry> y2 = new ArrayList<>();
         for (int i = 0; i < valores.size(); i++) {
-            x.add(Integer.toString(i + 1));
-            y1.add(new Entry(valores.get(i).getValor(),i+1));
-            y2.add(new Entry(valores.get(i).getPasos(), i + 1));
+            x.add(Integer.toString(i));
+            y1.add(new Entry(valores.get(i).getValor(),i));
+            y2.add(new Entry(valores.get(i).getPasos(), i));
 
         }
 

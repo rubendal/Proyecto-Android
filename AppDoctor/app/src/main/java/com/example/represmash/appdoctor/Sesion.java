@@ -1,32 +1,47 @@
 package com.example.represmash.appdoctor;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
 /**
  * Created by Ruben on 04/03/2016.
  */
-public class Sesion {
+public class Sesion implements AsyncMethod {
 
     public static int ID = -1;
     public static String username = "";
 
-    public static boolean iniciarSesion(Activity activity, String username, String password){
+    public static void iniciarSesion(Activity activity, String username, String password){
 
         HashMap<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("password", password);
+
+        new PostAsyncTask(activity, params, new Sesion(), "Iniciando sesión",true).execute(Servidor.Direccion("/doctor/login.php"));
+    }
+
+    public static HashMap<String, String> sesionParams(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id_doctor", Integer.toString(ID));
+        return params;
+    }
+
+    @Override
+    public void Haz(Activity activity, String res) {
         try {
-            String response = new PostAsyncTask(activity, params, "Iniciando sesión").execute(Servidor.Direccion("/doctor/login.php")).get();
-
-
             try {
-                int id = Integer.parseInt(response);
+                int id = Integer.parseInt(res);
                 if (id != -1) {
                     Sesion.username = username;
                     Sesion.ID = id;
-                    return true;
+                    Intent i = new Intent(activity, InicioActivity.class);
+                    activity.startActivity(i);
+                    activity.finish();
+                }else{
+                    Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
 
@@ -34,12 +49,5 @@ public class Sesion {
         }catch(Exception e){
 
         }
-        return false;
-    }
-
-    public static HashMap<String, String> sesionParams(){
-        HashMap<String, String> params = new HashMap<>();
-        params.put("id_doctor", Integer.toString(ID));
-        return params;
     }
 }

@@ -18,17 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniciarSesion(View v){
 
-        //Ahorita no hay comprobación de sesión
-
         EditText username = (EditText) findViewById(R.id.usuario);
         EditText pass = (EditText) findViewById(R.id.password);
+        Sesion.iniciarSesion( this , username.getText().toString(), pass.getText().toString());
 
-        if(Sesion.iniciarSesion( this , username.getText().toString(), pass.getText().toString())) {
-            Intent i = new Intent(this, InicioActivity.class);
-            startActivity(i);
-            finish();
-        }else{
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        }
     }
 }

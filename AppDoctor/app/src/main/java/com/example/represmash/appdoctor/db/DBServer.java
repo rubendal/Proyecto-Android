@@ -2,6 +2,7 @@ package com.example.represmash.appdoctor.db;
 
 import android.app.Activity;
 
+import com.example.represmash.appdoctor.AsyncMethod;
 import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
 import com.example.represmash.appdoctor.Servidor;
@@ -18,7 +19,7 @@ import java.util.LinkedList;
 /**
  * Created by Ruben on 24/03/2016.
  */
-public class DBServer {
+public class DBServer implements AsyncMethod {
 
     //AppPaciente
     public static void upload(Activity activity){
@@ -33,51 +34,55 @@ public class DBServer {
 
     //AppDoctor
     public static void download(Activity activity,Paciente paciente){
-        DB db = new DB(activity);
 
-        db.open();
+        new PostAsyncTask(activity, paciente.generatePOSTID(), new DBServer(),"Cargando", true).execute(Servidor.Direccion("/doctor/descargar.php"));
 
-        ArrayList<Valor> valores = db.getAll();
-
-        try{
-            String res = new PostAsyncTask(activity, paciente.generatePOSTID(), "", false).execute(Servidor.Direccion("/doctor/descargar.php")).get();
-
-            //Leemos json y comparamos si timestamp, valor y pasos son iguales
-            JSONArray json = new JSONArray(res);
-
-            LinkedList<Valor> valoresNuevos = new LinkedList<>();
-
-            for(int i =0;i<json.length();i++){
-                JSONObject data = json.getJSONObject(i);
-
-                int id = data.getInt("id");
-                //int id_paciente = data.getInt("id_paciente");
-                String timestamp = data.getString("timestamp");
-                String timestamp_servidor = data.getString("timestamp_servidor");
-                int valor = data.getInt("valor");
-                int pasos = data.getInt("pasos");
-
-                valoresNuevos.add(new Valor(valor,pasos,timestamp));
-
-
-            }
-
-            //Si son iguales no hacemos nada
-            //Sino insertamos el registro en la base de datos
-            for(Valor v : valoresNuevos){
-                if(!valores.contains(v)){
-                    db.insertWithTimestamp(v.getValor(),v.getPasos(),v.getTimestamp());
-                }
-            }
-
-
-
-        }catch(Exception e){
-
-        }
-
-
-        db.close();
     }
 
+    @Override
+    public void Haz(Activity activity, String res) {
+            try{
+                DB db = new DB(activity);
+
+                db.open();
+
+                ArrayList<Valor> valores = db.getAll();
+                //Leemos json y comparamos si timestamp, valor y pasos son iguales
+                JSONArray json = new JSONArray(res);
+
+                LinkedList<Valor> valoresNuevos = new LinkedList<>();
+
+                for(int i =0;i<json.length();i++){
+                    JSONObject data = json.getJSONObject(i);
+
+                    int id = data.getInt("id");
+                    //int id_paciente = data.getInt("id_paciente");
+                    String timestamp = data.getString("timestamp");
+                    String timestamp_servidor = data.getString("timestamp_servidor");
+                    int valor = data.getInt("valor");
+                    int pasos = data.getInt("pasos");
+
+                    valoresNuevos.add(new Valor(valor,pasos,timestamp));
+
+
+                }
+
+                //Si son iguales no hacemos nada
+                //Sino insertamos el registro en la base de datos
+                for(Valor v : valoresNuevos){
+                    if(!valores.contains(v)){
+                        db.insertWithTimestamp(v.getValor(),v.getPasos(),v.getTimestamp());
+                    }
+                }
+
+
+                db.close();
+
+            }catch(Exception e){
+
+            }
+
+
+
+        }
 }

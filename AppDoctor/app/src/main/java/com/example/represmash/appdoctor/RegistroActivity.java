@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class RegistroActivity extends AppCompatActivity {
+public class RegistroActivity extends AppCompatActivity implements AsyncMethodActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +41,8 @@ public class RegistroActivity extends AppCompatActivity {
                     Integer.parseInt(edad.getText().toString()), g, contacto.getText().toString(), telefonoContacto.getText().toString());
 
             if (paciente.isComplete()) {
-                try {
-                    String res = new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente").execute(Servidor.Direccion("/doctor/registro.php")).get();
-                    int i = Integer.parseInt(res);
-                    if (i != -1) {
-                        Toast.makeText(this, R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
-                }
-            } else {
+                new PostAsyncTask(this, paciente.generatePOSTParams(Sesion.ID), "Registrando paciente",this,true).execute(Servidor.Direccion("/doctor/registro.php"));
+            }else {
                 Toast.makeText(this, R.string.faltan_datos, Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
@@ -61,5 +50,20 @@ public class RegistroActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void Haz(String res) {
+        try {
+            int i = Integer.parseInt(res);
+            if (i != -1) {
+                Toast.makeText(this, R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+        }
     }
 }

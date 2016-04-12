@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ListaPacientesActivity extends ListActivity {
+public class ListaPacientesActivity extends ListActivity implements AsyncMethodActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,28 @@ public class ListaPacientesActivity extends ListActivity {
 
         HashMap<String, String> params = new HashMap<>();
         params.put("id_doctor", Integer.toString(Sesion.ID));
+
+        new PostAsyncTask(this, params, "Obteniendo lista",this, true).execute(Servidor.Direccion("/doctor/pacientes.php"));
+
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Paciente paciente = (Paciente)getListAdapter().getItem(position);
+
+        Intent i = new Intent(this, MenuActivity.class);
+        i.putExtra("paciente",paciente);
+        startActivity(i);
+    }
+
+    @Override
+    public void Haz(String res) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         try {
-            String json = new PostAsyncTask(this, params, "Obteniendo lista").execute(Servidor.Direccion("/doctor/pacientes.php")).get();
-
             try {
-                JSONArray jsonArray = new JSONArray(json);
+                JSONArray jsonArray = new JSONArray(res);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject data = jsonArray.getJSONObject(i);
                     int id = data.getInt("id");
@@ -50,16 +66,5 @@ public class ListaPacientesActivity extends ListActivity {
             finish();
         }
         setListAdapter(new PacienteAdapter(this,pacientes));
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-        Paciente paciente = (Paciente)getListAdapter().getItem(position);
-
-        Intent i = new Intent(this, MenuActivity.class);
-        i.putExtra("paciente",paciente);
-        startActivity(i);
     }
 }

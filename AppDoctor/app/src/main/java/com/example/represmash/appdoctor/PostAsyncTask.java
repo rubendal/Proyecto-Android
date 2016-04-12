@@ -25,23 +25,45 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
     private HashMap<String, String> postParams;
     private String title;
     private boolean conDialog;
+    private AsyncMethod asyncMethod;
+    private AsyncMethodActivity asyncMethodActivity;
 
     private ProgressDialog dialog;
 
-    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, String title) {
+    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, String title, AsyncMethodActivity asyncMethodActivity) {
+        this.activity = activity;
+        this.postParams = postParams;
+        this.title = title;
+        conDialog = true;
+        this.asyncMethodActivity = asyncMethodActivity;
+        dialog = new ProgressDialog(activity);
+    }
+
+    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, String title, AsyncMethodActivity asyncMethodActivity, boolean conDialog) {
+        this.activity = activity;
+        this.postParams = postParams;
+        this.title = title;
+        this.conDialog = conDialog;
+        this.asyncMethodActivity = asyncMethodActivity;
+        dialog = new ProgressDialog(activity);
+    }
+
+    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, AsyncMethod cl, String title) {
         this.activity = activity;
         this.postParams = postParams;
         this.title = title;
         conDialog = true;
         dialog = new ProgressDialog(activity);
+        this.asyncMethod = cl;
     }
 
-    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, String title, boolean conDialog) {
+    public PostAsyncTask(Activity activity, HashMap<String, String> postParams, AsyncMethod cl,String title, boolean conDialog) {
         this.activity = activity;
         this.postParams = postParams;
         this.title = title;
         this.conDialog = conDialog;
         dialog = new ProgressDialog(activity);
+        this.asyncMethod = cl;
     }
 
     @Override
@@ -108,6 +130,11 @@ public class PostAsyncTask extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
         if(conDialog) {
             dialog.dismiss();
+        }
+        if(asyncMethodActivity!=null) {
+            asyncMethodActivity.Haz(s);
+        }else{
+            asyncMethod.Haz(activity,s);
         }
     }
 
