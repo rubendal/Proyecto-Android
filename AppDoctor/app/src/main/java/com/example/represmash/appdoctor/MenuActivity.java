@@ -37,9 +37,7 @@ public class MenuActivity extends AppCompatActivity {
         //Descargar graficas
         DBServer.download(this,paciente);
 
-        Intent i = new Intent(this, GraphActivity.class);
-        i.putExtra("paciente",paciente);
-        startActivity(i);
+
     }
 
     public void mandarAlerta(View v){

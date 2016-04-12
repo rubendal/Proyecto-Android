@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.Valor;
 
 import java.util.ArrayList;
@@ -34,21 +35,47 @@ public class DB {
         ArrayList<Valor> lista = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            lista.add(new Valor(cursor.getInt(2),cursor.getInt(3),cursor.getString(1)));
+            while(cursor.moveToNext()){
+                Valor v = new Valor(cursor.getInt(3),cursor.getInt(4),cursor.getString(2));
+                v.setId_paciente(cursor.getInt(1));
+                lista.add(v);
+            }
         }
 
         return lista;
     }
 
-    public long insert(int value,int pasos){
+    public ArrayList<Valor> getDataFromPaciente(Paciente paciente){
+        Cursor cursor = db.query(DBHelper.NAME,
+                DBHelper.COLUMNAS,
+                DBHelper.ENTRY_ID_PACIENTE + " = " + paciente.getId(),
+                null,
+                null,
+                null,
+                null);
+
+        ArrayList<Valor> lista = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            Valor v = new Valor(cursor.getInt(3),cursor.getInt(4),cursor.getString(2));
+            v.setId_paciente(cursor.getInt(1));
+            lista.add(v);
+        }
+
+        return lista;
+    }
+
+    public long insert(int id_paciente, int value,int pasos){
         ContentValues values = new ContentValues();
+        values.put(DBHelper.ENTRY_ID_PACIENTE,id_paciente);
         values.put(DBHelper.ENTRY_VALUE,value);
         values.put(DBHelper.ENTRY_PASOS,pasos);
         return db.insert(DBHelper.NAME, null, values);
     }
 
-    public long insertWithTimestamp(int value,int pasos,String timestamp){
+    public long insertWithTimestamp(int id_paciente, int value,int pasos,String timestamp){
         ContentValues values = new ContentValues();
+        values.put(DBHelper.ENTRY_ID_PACIENTE,id_paciente);
         values.put(DBHelper.ENTRY_VALUE,value);
         values.put(DBHelper.ENTRY_PASOS,pasos);
         values.put(DBHelper.ENTRY_TIMESTAMP,timestamp);

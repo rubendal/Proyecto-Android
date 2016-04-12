@@ -21,10 +21,10 @@ import java.util.LinkedList;
  */
 public class Graph {
 
-    public static void showGraph(final Activity activity, @IdRes final int graph){
+    public static void showGraph(final Activity activity, @IdRes final int graph, Paciente paciente){
         DB db = new DB(activity.getApplicationContext());
         db.open();
-        ArrayList<Valor> valores = db.getAll();
+        ArrayList<Valor> valores = db.getDataFromPaciente(paciente);
 
         LineChart lineChart = (LineChart)activity.findViewById(graph);
 
@@ -68,6 +68,9 @@ public class Graph {
         dataSets.add(set2);
         LineData data = new LineData(x, dataSets);
         lineChart.setData(data);
+
+        lineChart.notifyDataSetChanged();
+        lineChart.invalidate();
 
         db.close();
     }

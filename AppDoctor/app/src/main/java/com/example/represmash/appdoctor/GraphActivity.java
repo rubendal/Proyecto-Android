@@ -24,8 +24,10 @@ public class GraphActivity extends AppCompatActivity {
 
         db.close();*/
 
+        Paciente paciente = (Paciente)getIntent().getSerializableExtra("paciente");
+
         //Graph.showGraph usa la base de datos
-        Graph.showGraph(this,R.id.graph);
+        Graph.showGraph(this,R.id.graph, paciente);
 
     }
 }

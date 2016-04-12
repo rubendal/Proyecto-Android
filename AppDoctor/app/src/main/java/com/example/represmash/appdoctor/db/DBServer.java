@@ -1,8 +1,11 @@
 package com.example.represmash.appdoctor.db;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 
 import com.example.represmash.appdoctor.AsyncMethod;
+import com.example.represmash.appdoctor.GraphActivity;
 import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
 import com.example.represmash.appdoctor.Servidor;
@@ -21,6 +24,8 @@ import java.util.LinkedList;
  */
 public class DBServer implements AsyncMethod {
 
+    private static Paciente paciente;
+
     //AppPaciente
     public static void upload(Activity activity){
         DB db = new DB(activity);
@@ -34,7 +39,7 @@ public class DBServer implements AsyncMethod {
 
     //AppDoctor
     public static void download(Activity activity,Paciente paciente){
-
+        DBServer.paciente = paciente;
         new PostAsyncTask(activity, paciente.generatePOSTID(), new DBServer(),"Cargando", true).execute(Servidor.Direccion("/doctor/descargar.php"));
 
     }
@@ -46,7 +51,7 @@ public class DBServer implements AsyncMethod {
 
                 db.open();
 
-                ArrayList<Valor> valores = db.getAll();
+                ArrayList<Valor> valores = db.getDataFromPaciente(paciente);
                 //Leemos json y comparamos si timestamp, valor y pasos son iguales
                 JSONArray json = new JSONArray(res);
 
@@ -56,13 +61,15 @@ public class DBServer implements AsyncMethod {
                     JSONObject data = json.getJSONObject(i);
 
                     int id = data.getInt("id");
-                    //int id_paciente = data.getInt("id_paciente");
+                    int id_paciente = data.getInt("id_paciente");
                     String timestamp = data.getString("timestamp");
                     String timestamp_servidor = data.getString("timestamp_servidor");
                     int valor = data.getInt("valor");
                     int pasos = data.getInt("pasos");
 
-                    valoresNuevos.add(new Valor(valor,pasos,timestamp));
+                    Valor v = new Valor(valor,pasos,timestamp);
+                    v.setId_paciente(id_paciente);
+                    valoresNuevos.add(v);
 
 
                 }
@@ -71,9 +78,11 @@ public class DBServer implements AsyncMethod {
                 //Sino insertamos el registro en la base de datos
                 for(Valor v : valoresNuevos){
                     if(!valores.contains(v)){
-                        db.insertWithTimestamp(v.getValor(),v.getPasos(),v.getTimestamp());
+                        db.insertWithTimestamp(v.getId_paciente(),v.getValor(),v.getPasos(),v.getTimestamp());
                     }
                 }
+
+
 
 
                 db.close();
@@ -82,7 +91,9 @@ public class DBServer implements AsyncMethod {
 
             }
 
-
+        Intent i = new Intent(activity, GraphActivity.class);
+        i.putExtra("paciente",paciente);
+        activity.startActivity(i);
 
         }
 }
