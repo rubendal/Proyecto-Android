@@ -1,4 +1,4 @@
-## Cosas que hacer
+﻿## Cosas que hacer
 
 ### AppDoctor
 * Servicio para descargar datos de paciente que inicie en boot
@@ -9,8 +9,8 @@
 
 ### AppPaciente
 * ~~Servicio para subir los datos al servidor~~
-* Servicio para recibir alertas, inicia en boot
-* Notificaciones de alertas
+* ~~Servicio para recibir alertas, inicia en boot~~
+* ~~Notificaciones de alertas~~
 * Pruebas de bluetooth
 * Mejorar diseño (NavigationDrawer)
 * Localizacion de strings
@@ -19,3 +19,6 @@
 * PHPs necesarios para los servicios
 * ~~PHP (subir.php) para subir valores recolectados en AppPaciente~~
 * ~~PHP (config.php) para verificar el id el paciente en la configuracion inicial en AppPaciente en InitActivity~~
+
+### Base de datos
+*  ~~Agregar columna id a alerta (llave primaria, quitar la llave primaria id_paciente)~~ (Ya esta en el servidor pero no en el dump)

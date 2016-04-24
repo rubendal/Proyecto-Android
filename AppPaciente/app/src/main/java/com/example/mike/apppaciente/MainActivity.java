@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Usamos SharedPreferences para obtener el paciente
+        //Usamos SharedPreferences para obtener el paciente, los datos excepto id estan vacios
         SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
 
         Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("telefono",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
