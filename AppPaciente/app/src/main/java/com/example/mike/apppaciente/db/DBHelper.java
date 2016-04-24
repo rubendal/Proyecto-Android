@@ -11,8 +11,9 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String ENTRY_TIMESTAMP = "timestamp";
     public static final String ENTRY_VALUE = "value";
     public static final String ENTRY_PASOS = "pasos";
+    public static final String ENTRY_SUBIDO = "subido";
 
-    public static final String[] COLUMNAS = {ENTRY_ID, ENTRY_TIMESTAMP, ENTRY_VALUE, ENTRY_PASOS};
+    public static final String[] COLUMNAS = {ENTRY_ID, ENTRY_TIMESTAMP, ENTRY_VALUE, ENTRY_PASOS, ENTRY_SUBIDO};
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
@@ -21,7 +22,8 @@ public class DBHelper extends SQLiteOpenHelper{
                     ENTRY_ID + " INTEGER PRIMARY KEY," +
                     ENTRY_TIMESTAMP + " TIMESTAMP DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime'))," +
                     ENTRY_VALUE + " INT," +
-                    ENTRY_PASOS + " INT)";
+                    ENTRY_PASOS + " INT," +
+                    ENTRY_SUBIDO + " INT DEFAULT 0)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + NAME;

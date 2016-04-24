@@ -6,4 +6,7 @@
     <string name="volume">Relación del radio de la pierna</string>
     <string name="steps">Pasos</string>
     <string name="llamada_doc">Llamando al Doctor</string>
+    <string name="id_del_paciente">ID del paciente</string>
+    <string name="telefono_doctor">Telefono doctor</string>
+    <string name="guardar">Guardar</string>
 </resources>

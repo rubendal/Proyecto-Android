@@ -12,18 +12,6 @@ public class GraficasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficas);
 
-        DB db = new DB(this);
-        db.open();
-
-        //Datos de prueba
-        db.insert(100,7);
-        db.insert(110,13);
-        db.insert(105,20);
-        db.insert(102,3);
-        db.insert(111,30);
-
-        db.close();
-
         Graph.showGraph(this,R.id.graph);
 
     }

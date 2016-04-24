@@ -34,7 +34,7 @@ public class DB {
         ArrayList<Valor> lista = new ArrayList<>();
 
         while(cursor.moveToNext()){
-            lista.add(new Valor(cursor.getInt(2),cursor.getInt(3),cursor.getString(1)));
+            lista.add(new Valor(cursor.getInt(0),cursor.getInt(2),cursor.getInt(3),cursor.getString(1),cursor.getInt(4)));
         }
 
         return lista;
@@ -53,6 +53,12 @@ public class DB {
         values.put(DBHelper.ENTRY_PASOS,pasos);
         values.put(DBHelper.ENTRY_TIMESTAMP,timestamp);
         return db.insert(DBHelper.NAME, null, values);
+    }
+
+    public long update(Valor valor){
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.ENTRY_SUBIDO,valor.getSubido());
+        return db.update(DBHelper.NAME,values,DBHelper.ENTRY_ID + " = " + valor.getId_db(),null);
     }
 
     public void open(){

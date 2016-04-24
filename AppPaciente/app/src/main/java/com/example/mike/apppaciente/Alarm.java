@@ -37,136 +37,20 @@ public class Alarm extends BroadcastReceiver {
         //Toast.makeText(context, "Prueba de alarma de servicio", Toast.LENGTH_LONG).show();
 
         final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(bluetoothAdapter != null){
+        if(bluetoothAdapter != null) {
             //There is bluetooth
-            if(bluetoothAdapter.isEnabled()){
-               //Toast.makeText(MainActivity.this, "Bluetooth esta activado", Toast.LENGTH_SHORT).show();
-            }else{
+            if (bluetoothAdapter.isEnabled()) {
+                //Toast.makeText(MainActivity.this, "Bluetooth esta activado", Toast.LENGTH_SHORT).show();
+            } else {
                 //Toast.makeText(MainActivity.this, "Bluetooth no esta activado", Toast.LENGTH_SHORT).show();
                 bluetoothAdapter.enable();
             }
 
-            new Thread(new Runnable() {
-                BluetoothSocket tmp = null;
-
-                private void connect() throws Exception{
-                    BluetoothDevice device = bluetoothAdapter.getRemoteDevice("00:06:66:4E:47:73");
-                    Log.d("Bluetooth", "Conectando");
-                    tmp = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"));
-                    Thread.sleep(3000);
-                    //1 prender, 2 apagar
-                    tmp.connect();
-                    Log.d("Bluetooth", "Sleep");
-                    Log.d("Bluetooth", tmp.getRemoteDevice().toString());
-                }
-
-                private String read(){
-                    try {
-                        //Thread.sleep(5000);
-                        InputStream input = tmp.getInputStream();
-                        int j = 0;
-                        byte[] buffer = new byte[1024];
-
-                        int length = input.read(buffer);
-                        Log.d("Bluetooth", "Recibi " + length + " bytes");
-                        StringBuilder sb = new StringBuilder();
-                        for (byte b : buffer) {
-                            if (b != 0 && b != 13) {
-                                sb.append((char) b);
-                            }
-                        }
-                        String n = sb.toString(); //new String(buffer,0,length-2);
-                        Log.d("Bluetooth", "Cadena " + n);
-
-                        return n;
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        return "";
-                    }
-                }
-
-                private String send(Integer id){
-                    try{
-                        Log.d("Bluetooth", "Conectado");
-                        OutputStream out = tmp.getOutputStream();
-                        out.write(id.toString().getBytes());
-                        Log.d("Bluetooth", id +" enviado");
-                        Thread.sleep(1000);
-                        String n = "";
-                        do {
-                            n += read();
-                        }while(!n.contains("\n"));
-
-                        return n;
-
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        return "";
-                    }
-                }
-
-                private void process(String res, String pasos){
-                    //Es un numero procesado correctamente
-                    int val = Integer.parseInt(res.replace("\n","").replace("a",""));
-                    int pas = Integer.parseInt(pasos.replace("\n", "").replace("a", ""));
-                    DB db = new DB(context);
-                    if(db.insert(val,pas)!=-1){
-                        Log.d("DB","Se inserto el valor " + val + " , " + pas);
-                    }else {
-                        Log.d("DB", "No se inserto el valor " + val + " , " + pas);
-                    }
-                }
-
-                @Override
-                public void run() {
-                    try {
-                        connect();
-                        String res = send(1);
-                        String pasos = send(2);
-                        //createNotification(context,"Valor recibido: " + res);
-                        //createNotification(context,"Pasos recibidos: " + pasos);
-                        //Toast.makeText(context,"Valor recibido: " + res,Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(context,"Pasos recibidos: " + pasos,Toast.LENGTH_SHORT).show();
-                        process(res, pasos);
-                        Log.d("Bluetooth", "Cerrado");
-                        tmp.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+            BluetoothAsyncTask asyncTask = new BluetoothAsyncTask(context,bluetoothAdapter);
+            asyncTask.execute();
         }
         w.release();
     }
-/*
-    public void createNotification(Context context, String msg){
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
-// Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(context, MainActivity.class);
-
-// The stack builder object will contain an artificial back stack for the
-// started Activity.
-// This ensures that navigating backward from the Activity leads out of
-// your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-// Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(MainActivity.class);
-// Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
-        mNotificationManager.notify(1, mBuilder.build());
-    }*/
 
     public void SetAlarm(Context context)
     {
