@@ -2,6 +2,7 @@ package com.example.mike.apppaciente;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 public class UploadAsyncTask extends AsyncTask<String, String, String> {
 
-    private Activity activity;
+    private Context context;
     private Valor valor;
     private HashMap<String, String> postParams;
     private String title;
@@ -31,22 +32,22 @@ public class UploadAsyncTask extends AsyncTask<String, String, String> {
 
     private ProgressDialog dialog;
 
-    public UploadAsyncTask(Activity activity, Valor valor, String title) {
-        this.activity = activity;
+    public UploadAsyncTask(Context context, Valor valor, String title) {
+        this.context = context;
         this.valor = valor;
         postParams = valor.generarParams();
         this.title = title;
         conDialog = true;
-        dialog = new ProgressDialog(activity);
+        dialog = new ProgressDialog(context);
     }
 
-    public UploadAsyncTask(Activity activity, Valor valor, String title, boolean conDialog) {
-        this.activity = activity;
+    public UploadAsyncTask(Context context, Valor valor, String title, boolean conDialog) {
+        this.context = context;
         this.valor = valor;
         postParams = valor.generarParams();
         this.title = title;
         this.conDialog = conDialog;
-        dialog = new ProgressDialog(activity);
+        dialog = new ProgressDialog(context);
     }
 
     @Override
@@ -117,7 +118,7 @@ public class UploadAsyncTask extends AsyncTask<String, String, String> {
         try{
             if(s.equals("1")){
                 valor.setSubido(1);
-                DB db = new DB(activity);
+                DB db = new DB(context);
                 db.open();
 
                 db.update(valor);

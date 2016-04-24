@@ -97,6 +97,7 @@ public class Valor {
 
     public HashMap<String,String> generarParams(){
         HashMap<String,String> params = new HashMap<>();
+        params.put("id_paciente",String.valueOf(Paciente.paciente.getId()));
         params.put("valor",String.valueOf(valor));
         params.put("pasos",String.valueOf(pasos));
         params.put("timestamp",String.valueOf(timestamp));

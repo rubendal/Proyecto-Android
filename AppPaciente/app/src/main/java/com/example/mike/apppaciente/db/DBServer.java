@@ -1,6 +1,7 @@
 package com.example.mike.apppaciente.db;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -27,8 +28,8 @@ public class DBServer {
     private static Paciente paciente;
 
     //AppPaciente
-    public static void upload(Activity activity){
-        DB db = new DB(activity);
+    public static void upload(Context context){
+        DB db = new DB(context);
 
         db.open();
 
@@ -36,7 +37,7 @@ public class DBServer {
 
         for(Valor valor :valores){
             if(valor.getSubido()==0) { //Este valor no se a subido
-                UploadAsyncTask asyncTask = new UploadAsyncTask(activity, valor, "Cargando", false);
+                UploadAsyncTask asyncTask = new UploadAsyncTask(context, valor, "Cargando", false);
                 asyncTask.execute(Servidor.Direccion("/doctor/subir.php"));
             }
         }

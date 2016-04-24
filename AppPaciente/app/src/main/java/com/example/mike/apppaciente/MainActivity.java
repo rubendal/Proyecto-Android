@@ -13,18 +13,17 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Paciente paciente;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Usamos SharedPreferences para obtener el paciente
-        SharedPreferences sharedPreferences = getSharedPreferences("paciente", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
 
-        paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("telefono",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
+        Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("telefono",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
                 sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
+        Paciente.paciente.setId(sharedPreferences.getInt("id",0));
     }
 
     public void activityGraficas(View view){
@@ -33,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void activityEmergencia(View view){
 
-        if(paciente != null) {
-            if(!paciente.getTelefono_emergencia().isEmpty()) {
-                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + paciente.getTelefono()));
+        if(Paciente.paciente != null) {
+            if(!Paciente.paciente.getTelefono_emergencia().isEmpty()) {
+                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Paciente.paciente.getTelefono()));
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     startActivity(i);
                 }

@@ -28,6 +28,10 @@
             android:name=".AlarmService"
             android:label="Alarm Service" />
 
+        <service android:name=".SubirService" android:label="Subir Service"/>
+
+        <receiver android:name=".SubirReceiver"/>
+
         <receiver android:name=".Alarm" />
         <receiver android:name=".BootReceiver">
             <intent-filter>

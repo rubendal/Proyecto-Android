@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 public class Paciente implements Serializable {
 
+    public static Paciente paciente;
+
     private String nombre, telefono;
     private int id, edad, genero;
 
