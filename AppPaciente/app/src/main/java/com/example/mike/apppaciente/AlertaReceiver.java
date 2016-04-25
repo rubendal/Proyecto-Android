@@ -31,14 +31,14 @@ public class AlertaReceiver extends BroadcastReceiver {
     public void SetAlarm(Context context)
     {
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, Alarm.class);
+        Intent intent = new Intent(context, AlertaReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), UPDATE , pi);
     }
 
     public void CancelAlarm(Context context)
     {
-        Intent intent = new Intent(context, Alarm.class);
+        Intent intent = new Intent(context, AlertaReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);

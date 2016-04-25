@@ -2,8 +2,9 @@
 
 ### AppDoctor
 * Servicio para descargar datos de paciente que inicie en boot
-* Lista de pacientes: Mostrar id para registrarlo en AppPaciente
-* Actualizar datos de grafica (Cambiar tag valores por "Diametro de la pierna")
+* Para el servicio hay que guardar los ids de los pacientes, se puede usar SharedPreferences con Set`<String>` o base de datos
+* ~~Lista de pacientes: Mostrar id para registrarlo en AppPaciente~~
+* ~~Actualizar datos de grafica (Cambiar tag valores por "Diametro de la pierna")~~
 * Mejorar diseño (NavigationDrawer)
 * Localizacion de strings
 

@@ -29,8 +29,12 @@
             android:label="Alarm Service" />
 
         <service android:name=".SubirService" android:label="Subir Service"/>
+        <service android:name=".AlertaService" android:label="Alerta Service"/>
+
+
 
         <receiver android:name=".SubirReceiver"/>
+        <receiver android:name=".AlertaReceiver"/>
 
         <receiver android:name=".Alarm" />
         <receiver android:name=".BootReceiver">
