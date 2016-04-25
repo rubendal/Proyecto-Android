@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.represmash.appdoctor">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +24,11 @@
         <activity android:name=".ListaPacientesActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".GraphActivity" />
-        <activity android:name=".AlertaActivity"></activity>
+        <activity android:name=".AlertaActivity" />
+        <activity
+            android:name=".InitActivity"
+            android:label="@string/title_activity_init"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,8 @@ public class Sesion implements AsyncMethod {
         params.put("username", username);
         params.put("password", password);
 
+        Sesion.username = username;
+
         new PostAsyncTask(activity, params, new Sesion(), "Iniciando sesión",true).execute(Servidor.Direccion("/doctor/login.php"));
     }
 
@@ -35,9 +37,9 @@ public class Sesion implements AsyncMethod {
             try {
                 int id = Integer.parseInt(res);
                 if (id != -1) {
-                    Sesion.username = username;
+                    //Sesion.username = username;
                     Sesion.ID = id;
-                    Intent i = new Intent(activity, InicioActivity.class);
+                    Intent i = new Intent(activity, InitActivity.class);
                     activity.startActivity(i);
                     activity.finish();
                 }else{

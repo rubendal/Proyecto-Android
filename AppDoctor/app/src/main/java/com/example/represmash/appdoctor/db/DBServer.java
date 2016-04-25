@@ -91,9 +91,9 @@ public class DBServer implements AsyncMethod {
 
             }
 
-        Intent i = new Intent(activity, GraphActivity.class);
+        /*Intent i = new Intent(activity, GraphActivity.class);
         i.putExtra("paciente",paciente);
-        activity.startActivity(i);
+        activity.startActivity(i);*/
 
         }
 }
