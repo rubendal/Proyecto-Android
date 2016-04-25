@@ -46,7 +46,7 @@ public class Graph {
 
         }
 
-        LineDataSet set1 = new LineDataSet(y1, "Valores");
+        LineDataSet set1 = new LineDataSet(y1, "Diametro de la pierna");
         LineDataSet set2 = new LineDataSet(y2, "Pasos");
 
         set1.setColor(Color.RED);

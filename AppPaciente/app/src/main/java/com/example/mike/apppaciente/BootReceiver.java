@@ -18,5 +18,6 @@ public class BootReceiver extends BroadcastReceiver {
         Paciente.paciente.setId(sharedPreferences.getInt("id",0));
         context.startService(new Intent(context,AlarmService.class));
         context.startService(new Intent(context,SubirService.class));
+        context.startService(new Intent(context,AlertaService.class));
     }
 }

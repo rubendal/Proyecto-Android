@@ -1,7 +1,9 @@
 package com.example.represmash.appdoctor;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -39,6 +41,13 @@ public class Sesion implements AsyncMethod {
                 if (id != -1) {
                     //Sesion.username = username;
                     Sesion.ID = id;
+                    SharedPreferences sharedPreferences = activity.getSharedPreferences("config", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putInt("id",id);
+                    editor.putString("username",username);
+
+                    editor.commit();
                     Intent i = new Intent(activity, InitActivity.class);
                     activity.startActivity(i);
                     activity.finish();

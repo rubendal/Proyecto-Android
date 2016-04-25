@@ -13,6 +13,10 @@ public class Paciente implements Serializable{
 
     private String nombre_emergencia, telefono_emergencia;
 
+    public Paciente(int id){
+        this.id = id;
+    }
+
     public Paciente(String nombre, String telefono, int edad, int genero, String nombre_emergencia, String telefono_emergencia) {
         this.nombre = nombre;
         this.telefono = telefono;

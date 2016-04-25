@@ -2,6 +2,8 @@ package com.example.represmash.appdoctor;
 
 
 import android.app.ListFragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -61,6 +65,11 @@ public class ListaPacientesFragment extends ListFragment implements AsyncMethodA
     @Override
     public void Haz(String res) {
         ArrayList<Paciente> pacientes = new ArrayList<>();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
+        Set<String> set = sharedPreferences.getStringSet("pacientes",null);
+        if(set==null){
+            set = new HashSet<>();
+        }
         try {
             try {
                 JSONArray jsonArray = new JSONArray(res);
@@ -75,6 +84,8 @@ public class ListaPacientesFragment extends ListFragment implements AsyncMethodA
                     String telefono_emergencia = data.getString("telefono_emergencia");
 
                     Paciente paciente = new Paciente(nombre, telefono, edad, genero, contacto_emergencia, telefono_emergencia);
+
+                    set.add(String.valueOf(id));
                     paciente.setId(id);
                     pacientes.add(paciente);
                 }
@@ -88,6 +99,10 @@ public class ListaPacientesFragment extends ListFragment implements AsyncMethodA
             getActivity().getFragmentManager().popBackStack();
             //getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido,new BienvenidaFragment()).commit();*/
         }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putStringSet("pacientes",set);
+        editor.commit();
         setListAdapter(new PacienteAdapter(getActivity(),pacientes));
     }
 }

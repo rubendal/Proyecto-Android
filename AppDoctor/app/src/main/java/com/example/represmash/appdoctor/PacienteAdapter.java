@@ -30,10 +30,12 @@ public class PacienteAdapter extends ArrayAdapter<Paciente> {
         TextView name = (TextView)convertView.findViewById(R.id.nombre_paciente);
         TextView edad = (TextView)convertView.findViewById(R.id.edad_paciente);
         TextView telefono = (TextView)convertView.findViewById(R.id.telefono_paciente);
+        TextView id = (TextView)convertView.findViewById(R.id.id_pac);
         ImageView img = (ImageView)convertView.findViewById(R.id.img_paciente);
 
         name.setText(paciente.getNombre());
         edad.setText(String.format("%s: %d",convertView.getResources().getString(R.string.edad) ,paciente.getEdad()));
+        id.setText(String.format("ID: %d",paciente.getId()));
         telefono.setText(paciente.getTelefono());
 
         return convertView;

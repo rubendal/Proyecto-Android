@@ -1,10 +1,12 @@
 package com.example.represmash.appdoctor.db;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.example.represmash.appdoctor.AsyncMethod;
+import com.example.represmash.appdoctor.DescargarAsyncTask;
 import com.example.represmash.appdoctor.GraphActivity;
 import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
@@ -43,6 +45,13 @@ public class DBServer implements AsyncMethod {
         new PostAsyncTask(activity, paciente.generatePOSTID(), new DBServer(),"Cargando", true).execute(Servidor.Direccion("/doctor/descargar.php"));
 
     }
+
+    //AppDoctor
+    public static void download(Context context, Paciente paciente){
+        new DescargarAsyncTask(context, paciente.generatePOSTID(), "Cargando", false).execute(Servidor.Direccion("/doctor/descargar.php"));
+
+    }
+
 
     @Override
     public void Haz(Activity activity, String res) {
