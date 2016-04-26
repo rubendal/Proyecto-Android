@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //Usamos SharedPreferences para obtener el paciente, los datos excepto id estan vacios
         SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
 
-        Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("telefono",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
+        Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("tel",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
                 sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
         Paciente.paciente.setId(sharedPreferences.getInt("id",0));
     }
@@ -43,4 +43,12 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(new Intent(MainActivity.this, EmergenciaActivity.class));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startService(new Intent(this,SubirService.class));
+        startService(new Intent(this,AlertaService.class));
+        //startService(new Intent(this,AlarmService.class));
+
+    }
 }

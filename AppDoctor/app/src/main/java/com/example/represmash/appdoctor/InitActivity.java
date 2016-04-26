@@ -2,6 +2,7 @@ package com.example.represmash.appdoctor;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -49,6 +50,8 @@ public class InitActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager().beginTransaction().replace(R.id.contenido, new BienvenidaFragment()).commit();
+
+
     }
 
     @Override
@@ -121,5 +124,17 @@ public class InitActivity extends AppCompatActivity
 
     public void enviar2 (View view) {
         aFragment.enviar2(view);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startService(new Intent(this, Servicio.class));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

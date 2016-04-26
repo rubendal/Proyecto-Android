@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
                 if(sharedPreferences.contains("id")) {
                     Sesion.ID = sharedPreferences.getInt("id",0);
                     Sesion.username = sharedPreferences.getString("username","");
-                    Intent i = new Intent(SplashActivity.this, InicioActivity.class);
+                    Intent i = new Intent(SplashActivity.this, InitActivity.class);
                     startActivity(i);
                 }else{
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);

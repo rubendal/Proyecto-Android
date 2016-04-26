@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.PowerManager;
 
 import com.example.mike.apppaciente.db.DBServer;
@@ -22,6 +23,11 @@ public class AlertaReceiver extends BroadcastReceiver {
         PowerManager.WakeLock w = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CHECK");
         w.acquire();
 
+        SharedPreferences sharedPreferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+
+        Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("telefono",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
+                sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
+        Paciente.paciente.setId(sharedPreferences.getInt("id",0));
         AlertaAsyncTask asyncTask = new AlertaAsyncTask(context,Paciente.paciente.getId(),"Cargando",false);
         asyncTask.execute(Servidor.Direccion("/doctor/recalerta.php"));
 
