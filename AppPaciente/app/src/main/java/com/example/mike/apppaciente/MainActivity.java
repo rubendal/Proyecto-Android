@@ -1,8 +1,10 @@
 package com.example.mike.apppaciente;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,6 +18,13 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Graph.showGraph(MainActivity.this, R.id.graph2);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(this, SubirService.class));
         startService(new Intent(this,AlertaService.class));
         startService(new Intent(this,AlarmService.class));
-
+        registerReceiver(broadcastReceiver, new IntentFilter("com.example.mike.broadcastgrafica"));
     }
 
     @Override
@@ -68,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
         stopService(new Intent(this, SubirService.class));
         stopService(new Intent(this,AlertaService.class));
         stopService(new Intent(this, AlarmService.class));
+        unregisterReceiver(broadcastReceiver);
     }
 }

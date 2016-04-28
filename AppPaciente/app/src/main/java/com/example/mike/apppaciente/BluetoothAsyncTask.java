@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
                     process(res, pasos);
                     Log.e("Bluetooth", "Cerrado");
                     socket.close();
+                    context.sendBroadcast(new Intent("com.example.mike.broadcastgrafica"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

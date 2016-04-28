@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter bluetoothAdapter;
     private final Handler handler = new Handler();
-    private String mac = "A8:7C:01:48:7D:1C";
+    private String mac = "";
     private int diametro = 130;
     private int pasos = 40;
 
@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        handler.postDelayed(b,1000*60);
+        handler.post(b);
+        //handler.postDelayed(b,1000*60);
     }
 
     public void enviar(View view){
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         EditText p = (EditText)findViewById(R.id.pasos);
         diametro = Integer.parseInt(d.getText().toString());
         pasos = Integer.parseInt(p.getText().toString());
-        handler.postDelayed(b,1000*60);
+        handler.removeCallbacks(b);
+        handler.post(b);
+        //handler.postDelayed(b,1000*60);
 
     }
 
@@ -105,15 +108,19 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     server = bluetoothAdapter.listenUsingRfcommWithServiceRecord("connection", UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"));
                     socket = server.accept();
+                    Log.e("asdfg","conectado");
                     String r = read();
                     process(r);
                     r = read();
                     process(r);
+
+                    socket.close();
+                    server.close();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
             }
-            handler.postDelayed(b,1000*60);
+            //handler.postDelayed(b,1000*60);
         }
     };
 }
