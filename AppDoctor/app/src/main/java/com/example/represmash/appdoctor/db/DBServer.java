@@ -48,7 +48,7 @@ public class DBServer implements AsyncMethod {
 
     //AppDoctor
     public static void download(Context context, Paciente paciente){
-        new DescargarAsyncTask(context, paciente.generatePOSTID(), "Cargando", false).execute(Servidor.Direccion("/doctor/descargar.php"));
+        new DescargarAsyncTask(context, paciente, "Cargando", false).execute(Servidor.Direccion("/doctor/descargar.php"));
 
     }
 

@@ -2,12 +2,16 @@ package com.example.represmash.appdoctor;
 
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,13 @@ import com.example.represmash.appdoctor.db.DBServer;
 public class MenuFragment extends Fragment {
 
     private Paciente paciente;
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Graph.showGraph(getActivity(), R.id.graph2, paciente);
+        }
+    };
 
     public MenuFragment() {
         // Required empty public constructor
@@ -72,5 +83,17 @@ public class MenuFragment extends Fragment {
         i.aFragment.setArguments(bundle);
         getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido, i.aFragment).addToBackStack(".").commit();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(broadcastReceiver, new IntentFilter("com.example.represmash.broadcastgrafica"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(broadcastReceiver);
     }
 }

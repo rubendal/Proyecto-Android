@@ -46,6 +46,15 @@ public class DescargarAsyncTask extends AsyncTask<String, String, String> {
         dialog = new ProgressDialog(context);
     }
 
+    public DescargarAsyncTask(Context context, Paciente paciente, String title, boolean conDialog) {
+        this.context = context;
+        this.paciente = paciente;
+        this.postParams = paciente.generatePOSTID();
+        this.title = title;
+        this.conDialog = conDialog;
+        dialog = new ProgressDialog(context);
+    }
+
     public DescargarAsyncTask(Context context, HashMap<String, String> postParams, String title, boolean conDialog) {
         this.context = context;
         this.paciente = paciente;

@@ -4,12 +4,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Ruben on 24/04/2016.
  */
 public class Servicio extends Service {
     DescargaReceiver alarm = new DescargaReceiver();
+
     public void onCreate()
     {
         super.onCreate();

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
+import android.util.Log;
 
 import com.example.represmash.appdoctor.db.DBServer;
 
@@ -17,7 +18,7 @@ import java.util.Set;
  * Created by Ruben on 24/04/2016.
  */
 public class DescargaReceiver extends BroadcastReceiver {
-    private long UPDATE = 1000 * 60 * 5;
+    private long UPDATE = 1000 * 60 * 1;
 
     @Override
     public void onReceive(final Context context, Intent intent)
@@ -25,7 +26,7 @@ public class DescargaReceiver extends BroadcastReceiver {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock w = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CHECK");
         w.acquire();
-
+        
         SharedPreferences sharedPreferences = context.getSharedPreferences("config",Context.MODE_PRIVATE);
         Sesion.username = sharedPreferences.getString("username","");
         Sesion.ID = sharedPreferences.getInt("id",0);
@@ -45,20 +46,23 @@ public class DescargaReceiver extends BroadcastReceiver {
             }
         }
 
+        Intent i = new Intent("com.example.represmash.broadcastgrafica");
+        context.sendBroadcast(i);
+
         w.release();
     }
 
     public void SetAlarm(Context context)
     {
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, Service.class);
+        Intent intent = new Intent(context, DescargaReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), UPDATE , pi);
     }
 
     public void CancelAlarm(Context context)
     {
-        Intent intent = new Intent(context, Service.class);
+        Intent intent = new Intent(context, DescargaReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
