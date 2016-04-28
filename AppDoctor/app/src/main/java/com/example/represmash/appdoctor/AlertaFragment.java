@@ -59,12 +59,14 @@ public class AlertaFragment extends Fragment implements AsyncMethodActivity{
             int i = Integer.parseInt(res);
             if (i != -1) {
                 Toast.makeText(getActivity(), R.string.alerta_enviada, Toast.LENGTH_SHORT).show();
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido, new BienvenidaFragment()).commit();
+                getActivity().getFragmentManager().popBackStack();
             } else {
                 Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                getActivity().getFragmentManager().popBackStack();
             }
         }catch(Exception e){
             Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            getActivity().getFragmentManager().popBackStack();
         }
     }
 }

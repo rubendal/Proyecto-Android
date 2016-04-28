@@ -55,9 +55,11 @@ public class RegistroFragment extends Fragment implements AsyncMethodActivity{
                 new PostAsyncTask(getActivity(), paciente.generatePOSTParams(Sesion.ID), "Registrando paciente",this,true).execute(Servidor.Direccion("/doctor/registro.php"));
             }else {
                 Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
+                //getActivity().getFragmentManager().popBackStack();
             }
         }catch(Exception e){
             Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
+            //getActivity().getFragmentManager().popBackStack();
         }
 
     }
@@ -69,12 +71,14 @@ public class RegistroFragment extends Fragment implements AsyncMethodActivity{
             int i = Integer.parseInt(res);
             if (i != -1) {
                 Toast.makeText(getActivity(), R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido, new BienvenidaFragment()).commit();
+                getActivity().getFragmentManager().popBackStack();
             } else {
                 Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                getActivity().getFragmentManager().popBackStack();
             }
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            getActivity().getFragmentManager().popBackStack();
         }
     }
 }

@@ -1,7 +1,9 @@
 package com.example.represmash.appdoctor;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -54,7 +56,7 @@ public class InitActivity extends AppCompatActivity
         } else {
             //super.onBackPressed();
             if (getFragmentManager().getBackStackEntryCount() == 0){
-                this.finish();
+                salirAlerta();
             } else {
                 getFragmentManager().popBackStack();
             }
@@ -95,6 +97,8 @@ public class InitActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
             getFragmentManager().beginTransaction().replace(R.id.contenido, new ListaPacientesFragment()).addToBackStack("--").commit();
             //rFragment = null;
+        } else if (id == R.id.salir){
+            salirAlerta();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -128,5 +132,24 @@ public class InitActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
 
+    }
+
+    private void salirAlerta(){
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Salir")
+                .setMessage("¿Está seguro de que quiere salir?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

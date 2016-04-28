@@ -10,6 +10,10 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_people_24dp"
             android:title="Mis pacientes" />
+        <item
+            android:id="@+id/salir"
+            android:icon="@drawable/ic_cancel_24dp"
+            android:title = "Salir"/>
     </group>
 
 </menu>

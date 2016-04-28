@@ -33,6 +33,6 @@ public class BienvenidaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView bienvenida = (TextView) getView().findViewById(R.id.bienvenida);
         bienvenida.setText("Bienvenido, " + Sesion.username);
-        getActivity().getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getActivity().getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }
