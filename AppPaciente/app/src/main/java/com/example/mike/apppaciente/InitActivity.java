@@ -18,6 +18,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
 
     private EditText idPaciente;
     private EditText telDoctor;
+    private EditText macAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,14 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
 
         idPaciente = (EditText)findViewById(R.id.id);
         telDoctor = (EditText)findViewById(R.id.tel);
+        macAddress = (EditText)findViewById(R.id.mac);
     }
 
     public void guardar(View view){
         try {
             int id = Integer.parseInt(idPaciente.getText().toString());
             String tel = telDoctor.getText().toString();
+            String mac = macAddress.getText().toString();
 
             HashMap<String,String> params = new HashMap<>();
             params.put("id",String.valueOf(id));
@@ -50,6 +53,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
 
             int id = Integer.parseInt(idPaciente.getText().toString());
             String tel = telDoctor.getText().toString();
+            String mac = macAddress.getText().toString();
 
             SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
 
@@ -57,6 +61,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
 
             editor.putInt("id",id);
             editor.putString("tel",tel);
+            editor.putString("mac",mac);
 
             editor.commit();
 

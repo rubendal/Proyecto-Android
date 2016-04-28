@@ -23,6 +23,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
     private BluetoothAdapter adapter;
     private BluetoothDevice device;
     private BluetoothSocket socket;
+    private String mac;
 
 
     public BluetoothAsyncTask(Context context, BluetoothAdapter adapter){
@@ -32,7 +33,8 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPreExecute() {
         try {
-            device = adapter.getRemoteDevice("00:06:66:4E:47:73");
+            mac = context.getSharedPreferences("config",Context.MODE_PRIVATE).getString("mac","");
+            device = adapter.getRemoteDevice(mac); //"00:06:66:4E:47:73"
             socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"));
             Thread.sleep(3000);
             socket.connect();

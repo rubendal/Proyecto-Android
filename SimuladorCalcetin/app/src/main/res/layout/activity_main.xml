@@ -7,54 +7,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mike.apppaciente.InitActivity">
+    tools:context="com.example.ruben.simuladorcalcetin.MainActivity">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/id"
-        android:hint="@string/id_del_paciente"
+        android:id="@+id/diametro"
+        android:hint="Diametro"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="numberSigned"
         android:ems="10"
-        android:id="@+id/tel"
-        android:hint="@string/telefono_doctor"
-        android:layout_below="@+id/id"
-        android:layout_alignParentLeft="true"
+        android:id="@+id/pasos"
+        android:hint="Pasos"
+        android:layout_below="@+id/diametro"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/diametro" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/guardar"
-        android:id="@+id/guardar"
-        android:onClick="guardar"
+        android:text="Enviar"
+        android:id="@+id/enviar"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/tel"
-        android:layout_alignEnd="@+id/tel" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mac"
-        android:hint="@string/bluetooth_mac_address"
-        android:layout_below="@+id/tel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/tel"
-        android:layout_alignEnd="@+id/tel" />
+        android:layout_alignEnd="@+id/pasos"
+        android:onClick="enviar"/>
 </RelativeLayout>

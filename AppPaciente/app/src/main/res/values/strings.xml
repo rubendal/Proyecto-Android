@@ -9,4 +9,5 @@
     <string name="id_del_paciente">ID del paciente</string>
     <string name="telefono_doctor">Telefono doctor</string>
     <string name="guardar">Guardar</string>
+    <string name="bluetooth_mac_address">Bluetooth MAC Address</string>
 </resources>
