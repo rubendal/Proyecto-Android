@@ -16,7 +16,7 @@
 * ~~Servicio para subir los datos al servidor~~
 * ~~Servicio para recibir alertas, inicia en boot~~
 * ~~Notificaciones de alertas~~
-* Grafica con valor x como fecha
+* ~~Grafica con valor x como fecha~~
 * Pruebas de bluetooth (no se tendra el calcetin asi que habra que hacer simulador de este)
 * Mejorar diseño
 * Temas
