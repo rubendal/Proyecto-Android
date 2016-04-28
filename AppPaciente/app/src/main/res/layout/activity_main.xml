@@ -21,24 +21,27 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/emergencia"
-        android:id="@+id/llamar"
-        android:onClick="activityEmergencia"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/graph2"
+        android:text="@string/ver_graficas"
+        android:id="@+id/ver_grafs"
         android:layout_below="@+id/bienvenido"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/llamar"
-        android:layout_alignEnd="@+id/llamar"
-        android:layout_above="@+id/llamar" />
+        android:layout_marginTop="56dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="activityGraficas"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emergencia"
+        android:id="@+id/llamar"
+        android:layout_below="@+id/ver_grafs"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="activityEmergencia"/>
 
 </RelativeLayout>
