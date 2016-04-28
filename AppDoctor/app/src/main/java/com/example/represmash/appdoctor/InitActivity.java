@@ -1,8 +1,10 @@
 package com.example.represmash.appdoctor;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -125,13 +127,15 @@ public class InitActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        startService(new Intent(this, Servicio.class));
+        if(!isServiceRunning(Servicio.class)) {
+            startService(new Intent(this, Servicio.class));
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        stopService(new Intent(this, Servicio.class));
+        //stopService(new Intent(this, Servicio.class));
 
     }
 
@@ -152,5 +156,15 @@ public class InitActivity extends AppCompatActivity
                     }
                 }).setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

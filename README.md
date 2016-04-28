@@ -17,13 +17,13 @@
 * ~~Servicio para recibir alertas, inicia en boot~~
 * ~~Notificaciones de alertas~~
 * ~~Grafica con valor x como fecha~~
-* Pruebas de bluetooth (no se tendra el calcetin asi que habra que hacer simulador de este)
-* Mejorar diseño
+* ~~Pruebas de bluetooth (no se tendra el calcetin asi que habra que hacer simulador de este)~~
+* ~~Mejorar diseño~~
 * Temas
 * Localizacion de strings
 * Layouts de diferentes tamaños
 
-### Servidor
+### ~~Servidor~~
 * ~~PHPs necesarios para los servicios~~
 * ~~PHP (subir.php) para subir valores recolectados en AppPaciente~~
 * ~~PHP (config.php) para verificar el id el paciente en la configuracion inicial en AppPaciente en InitActivity~~
@@ -32,6 +32,7 @@
 *  ~~Agregar columna id a alerta (llave primaria, quitar la llave primaria id_paciente)~~ (Ya esta en el servidor pero no en el dump)
 
 ### Otras cosas
-* Diseñar iconos de apps
-* Hacer simulador de calcetin para pruebas de bluetooth
+* Diseñar iconos de apps (50%)
+* ~~Hacer simulador de calcetin para pruebas de bluetooth~~
+* Cambiar 1 AsyncTask por Volley
 * Signed APK

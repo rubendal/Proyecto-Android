@@ -1,6 +1,7 @@
 package com.example.mike.apppaciente;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
         Paciente.paciente.setId(sharedPreferences.getInt("id",0));
 
-        TextView textView = (TextView) findViewById(R.id.bienvenido);
-        textView.setText("Bienvenido, " + Paciente.paciente.getNombre());
+        //TextView textView = (TextView) findViewById(R.id.bienvenido);
+        //textView.setText("Bienvenido, " + Paciente.paciente.getNombre());
 
         Graph.showGraph(this, R.id.graph2);
 
@@ -65,18 +66,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startService(new Intent(this, SubirService.class));
-        startService(new Intent(this,AlertaService.class));
-        startService(new Intent(this,AlarmService.class));
+        if(!isServiceRunning(SubirService.class)) {
+            startService(new Intent(this, SubirService.class));
+        }
+        if(!isServiceRunning(AlertaService.class)) {
+            startService(new Intent(this, AlertaService.class));
+        }
+        if(!isServiceRunning(AlarmService.class)) {
+            startService(new Intent(this, AlarmService.class));
+        }
         registerReceiver(broadcastReceiver, new IntentFilter("com.example.mike.broadcastgrafica"));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        stopService(new Intent(this, SubirService.class));
-        stopService(new Intent(this,AlertaService.class));
-        stopService(new Intent(this, AlarmService.class));
+
+        //stopService(new Intent(this, SubirService.class));
+        //stopService(new Intent(this,AlertaService.class));
+        //stopService(new Intent(this, AlarmService.class));
         unregisterReceiver(broadcastReceiver);
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
