@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("tel",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
                 sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
         Paciente.paciente.setId(sharedPreferences.getInt("id",0));
+
+        TextView textView = (TextView) findViewById(R.id.bienvenido);
+        textView.setText("Bienvenido, " + Paciente.paciente.getNombre());
+
+        Graph.showGraph(this, R.id.graph2);
+
     }
 
     public void activityGraficas(View view){
