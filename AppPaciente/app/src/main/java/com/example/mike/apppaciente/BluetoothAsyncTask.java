@@ -28,6 +28,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
 
     public BluetoothAsyncTask(Context context, BluetoothAdapter adapter){
         this.adapter = adapter;
+        this.context = context;
     }
 
     @Override
@@ -39,6 +40,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
             Thread.sleep(3000);
             socket.connect();
         }catch(Exception e){
+            e.printStackTrace();
             super.cancel(true);
         }
         super.onPreExecute();
@@ -54,7 +56,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
                     //Toast.makeText(context,"Valor recibido: " + res,Toast.LENGTH_SHORT).show();
                     //Toast.makeText(context,"Pasos recibidos: " + pasos,Toast.LENGTH_SHORT).show();
                     process(res, pasos);
-                    Log.d("Bluetooth", "Cerrado");
+                    Log.e("Bluetooth", "Cerrado");
                     socket.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -90,7 +92,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
             byte[] buffer = new byte[1024];
 
             int length = input.read(buffer);
-            Log.d("Bluetooth", "Recibi " + length + " bytes");
+            Log.e("Bluetooth", "Recibi " + length + " bytes");
             StringBuilder sb = new StringBuilder();
             for (byte b : buffer) {
                 if (b != 0 && b != 13) {
@@ -98,7 +100,7 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
                 }
             }
             String n = sb.toString(); //new String(buffer,0,length-2);
-            Log.d("Bluetooth", "Cadena " + n);
+            Log.e("Bluetooth", "Cadena " + n);
 
             return n;
         }catch(Exception e){
@@ -112,19 +114,21 @@ public class BluetoothAsyncTask extends AsyncTask<String, String, String> {
         int val = Integer.parseInt(res.replace("\n","").replace("a",""));
         int pas = Integer.parseInt(pasos.replace("\n", "").replace("a", ""));
         DB db = new DB(context);
+        db.open();
         if(db.insert(val,pas)!=-1){
-            Log.d("DB","Se inserto el valor " + val + " , " + pas);
+            Log.e("DB","Se inserto el valor " + val + " , " + pas);
         }else {
-            Log.d("DB", "No se inserto el valor " + val + " , " + pas);
+            Log.e("DB", "No se inserto el valor " + val + " , " + pas);
         }
+        db.close();
     }
 
     private String send(Integer id){
         try{
-            Log.d("Bluetooth", "Conectado");
+            Log.e("Bluetooth", "Conectado");
             OutputStream out = socket.getOutputStream();
             out.write(id.toString().getBytes());
-            Log.d("Bluetooth", id +" enviado");
+            Log.e("Bluetooth", id +" enviado");
             Thread.sleep(1000);
             String n = "";
             do {

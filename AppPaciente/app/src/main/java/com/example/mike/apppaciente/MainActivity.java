@@ -56,9 +56,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startService(new Intent(this,SubirService.class));
+        startService(new Intent(this, SubirService.class));
         startService(new Intent(this,AlertaService.class));
-        //startService(new Intent(this,AlarmService.class));
+        startService(new Intent(this,AlarmService.class));
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopService(new Intent(this, SubirService.class));
+        stopService(new Intent(this,AlertaService.class));
+        stopService(new Intent(this, AlarmService.class));
     }
 }

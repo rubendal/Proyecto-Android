@@ -131,6 +131,7 @@ public class InitActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
+        stopService(new Intent(this, Servicio.class));
 
     }
 
