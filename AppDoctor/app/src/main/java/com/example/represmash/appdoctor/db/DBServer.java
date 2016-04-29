@@ -10,6 +10,7 @@ import com.example.represmash.appdoctor.DescargarAsyncTask;
 import com.example.represmash.appdoctor.GraphActivity;
 import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
+import com.example.represmash.appdoctor.R;
 import com.example.represmash.appdoctor.Servidor;
 import com.example.represmash.appdoctor.Sesion;
 import com.example.represmash.appdoctor.Valor;
@@ -42,13 +43,13 @@ public class DBServer implements AsyncMethod {
     //AppDoctor
     public static void download(Activity activity,Paciente paciente){
         DBServer.paciente = paciente;
-        new PostAsyncTask(activity, paciente.generatePOSTID(), new DBServer(),"Cargando", true).execute(Servidor.Direccion("/doctor/descargar.php"));
+        new PostAsyncTask(activity, paciente.generatePOSTID(), new DBServer(),activity.getString(R.string.cargando), true).execute(Servidor.Direccion("/doctor/descargar.php"));
 
     }
 
     //AppDoctor
     public static void download(Context context, Paciente paciente){
-        new DescargarAsyncTask(context, paciente, "Cargando", false).execute(Servidor.Direccion("/doctor/descargar.php"));
+        new DescargarAsyncTask(context, paciente, context.getString(R.string.cargando), false).execute(Servidor.Direccion("/doctor/descargar.php"));
 
     }
 

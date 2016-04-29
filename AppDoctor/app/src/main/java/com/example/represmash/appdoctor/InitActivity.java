@@ -141,8 +141,8 @@ public class InitActivity extends AppCompatActivity
 
     private void salirAlerta(){
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Salir")
-                .setMessage("¿Está seguro de que quiere salir?")
+                .setTitle(getString(R.string.salir))
+                .setMessage(R.string.salida)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -49,7 +49,7 @@ public class AlertaFragment extends Fragment implements AsyncMethodActivity{
         HashMap<String,String> params = new HashMap<>();
         params.put("paciente", paciente.getId() + "");
         params.put("alerta", alerta.getText().toString());
-        new PostAsyncTask(getActivity(), params, "Enviando alerta",this).execute(Servidor.Direccion("/doctor/alerta.php"));
+        new PostAsyncTask(getActivity(), params, getString(R.string.enviando_alerta),this).execute(Servidor.Direccion("/doctor/alerta.php"));
 
     }
 

@@ -1,26 +1,27 @@
 <resources>
     <string name="app_name">AppDoctor</string>
-    <string name="iniciar_sesion">Iniciar Sesion</string>
-    <string name="usuario">Usuario</string>
+    <string name="iniciar_sesion">Login</string>
+    <string name="usuario">User</string>
     <string name="password">Password</string>
-    <string name="bienvenido">Bienvenido</string>
-    <string name="registrar_paciente">Registrar Paciente</string>
-    <string name="mis_pacientes">Mis Pacientes</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="registrar_paciente">Register Patient</string>
+    <string name="mis_pacientes">My Patients</string>
     <string name="M">M</string>
     <string name="F">F</string>
-    <string name="nombre">Nombre</string>
-    <string name="telefono">Telefono</string>
-    <string name="edad">Edad</string>
-    <string name="caso_de_emergencia">Contactar en caso de emergencia</string>
-    <string name="ver_graficas">Ver Graficas</string>
-    <string name="mandar_alerta">Mandar Alerta</string>
-    <string name="contactar">Contactar</string>
-    <string name="emergencia_contactar_a">En caso de emergencia contactar a</string>
-    <string name="alerta_enviada">Alerta enviada</string>
-    <string name="enviar">Enviar</string>
-    <string name="alerta">Alerta</string>
-    <string name="paciente_registrado">Paciente registrado</string>
-    <string name="faltan_datos">Faltan datos por registrar</string>
+    <string name="nombre">Name</string>
+    <string name="telefono">Phone</string>
+    <string name="edad">Age</string>
+    <string name="caso_de_emergencia">Contact in case of emergency</string>
+    <string name="ver_graficas">Show Graphs</string>
+    <string name="mandar_alerta">Send Alert</string>
+    <string name="enviando_alerta">Sending alert</string>
+    <string name="contactar">Contact</string>
+    <string name="emergencia_contactar_a">In case of emergency, please contact</string>
+    <string name="alerta_enviada">Alert sent</string>
+    <string name="enviar">Send</string>
+    <string name="alerta">Alert</string>
+    <string name="paciente_registrado">Registered patient</string>
+    <string name="faltan_datos">Not enough data</string>
     <string name="error">Error</string>
     <string name="title_activity_init">InitActivity</string>
 
@@ -29,6 +30,12 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bienvenido2">"Welcome, "</string>
+    <string name="salir">Exit</string>
+    <string name="salida">Are you sure you want to exit?</string>
+    <string name="obtener_lista">Obtaining list</string>
+    <string name="cargando">Loading</string>
+    <string name="diametro">Leg diameter</string>
+    <string name="pasos">Steps</string>
 </resources>

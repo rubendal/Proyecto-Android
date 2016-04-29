@@ -5,15 +5,15 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_person_add_24dp"
-            android:title="Registrar paciente" />
+            android:title="@string/registrar_paciente" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_people_24dp"
-            android:title="Mis pacientes" />
+            android:title="@string/mis_pacientes"/>
         <item
             android:id="@+id/salir"
             android:icon="@drawable/ic_cancel_24dp"
-            android:title = "Salir"/>
+            android:title = "@string/salir"/>
     </group>
 
 </menu>

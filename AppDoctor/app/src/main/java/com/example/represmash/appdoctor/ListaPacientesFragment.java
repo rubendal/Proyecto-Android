@@ -41,7 +41,7 @@ public class ListaPacientesFragment extends ListFragment implements AsyncMethodA
         HashMap<String, String> params = new HashMap<>();
         params.put("id_doctor", Integer.toString(Sesion.ID));
 
-        new PostAsyncTask(getActivity(), params, "Obteniendo lista", this, true).execute(Servidor.Direccion("/doctor/pacientes.php"));
+        new PostAsyncTask(getActivity(), params, getString(R.string.obtener_lista), this, true).execute(Servidor.Direccion("/doctor/pacientes.php"));
 
         return inflater.inflate(R.layout.fragment_lista_pacientes, container, false);
 

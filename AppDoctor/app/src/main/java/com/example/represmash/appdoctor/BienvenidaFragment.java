@@ -32,7 +32,7 @@ public class BienvenidaFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView bienvenida = (TextView) getView().findViewById(R.id.bienvenida);
-        bienvenida.setText("Bienvenido, " + Sesion.username);
+        bienvenida.setText(getString(R.string.bienvenido2) + Sesion.username);
         //getActivity().getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

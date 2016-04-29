@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppDoctor</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="registrar_paciente">Registrar Paciente</string>
+    <string name="mis_pacientes">Mis Pacientes</string>
+    <string name="M">M</string>
+    <string name="F">F</string>
+    <string name="nombre">Nombre</string>
+    <string name="telefono">Telefono</string>
+    <string name="edad">Edad</string>
+    <string name="caso_de_emergencia">Contactar en caso de emergencia</string>
+    <string name="ver_graficas">Ver Gráficas</string>
+    <string name="mandar_alerta">Enviar Alerta</string>
+    <string name="enviando_alerta">Enviando alerta</string>
+    <string name="contactar">Contactar</string>
+    <string name="emergencia_contactar_a">En caso de emergencia, contactar a</string>
+    <string name="alerta_enviada">Alerta enviada</string>
+    <string name="enviar">Enviar</string>
+    <string name="alerta">Alerta</string>
+    <string name="paciente_registrado">Paciente registrado</string>
+    <string name="faltan_datos">Faltan datos</string>
+    <string name="error">Error</string>
+    <string name="title_activity_init">InitActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bienvenido2">"Bienvenido, "</string>
+    <string name="salir">Salir</string>
+    <string name="salida">¿Estás seguro de querer salir?</string>
+    <string name="obtener_lista">Obteniendo lista</string>
+    <string name="cargando">Cargando</string>
+    <string name="diametro">Diametro de la pierna</string>
+    <string name="pasos">Pasos</string>
+</resources>
