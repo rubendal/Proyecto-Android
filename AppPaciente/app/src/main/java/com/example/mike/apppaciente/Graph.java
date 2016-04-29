@@ -44,8 +44,8 @@ public class Graph {
 
         }
 
-        LineDataSet set1 = new LineDataSet(y1, "Diametro de la pierna");
-        LineDataSet set2 = new LineDataSet(y2, "Pasos");
+        LineDataSet set1 = new LineDataSet(y1, activity.getString(R.string.volume));
+        LineDataSet set2 = new LineDataSet(y2, activity.getString(R.string.steps));
 
         set1.setColor(Color.RED);
         set1.setCircleColor(Color.RED);

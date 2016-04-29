@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppPaciente</string>
+    <string name="ver_graficas">Ver Gráficas</string>
+    <string name="emergencia">Emergencia</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="volume">Volumen</string>
+    <string name="steps">Pasos</string>
+    <string name="llamada_doc">Llamando al doctor</string>
+    <string name="id_del_paciente">ID del paciente</string>
+    <string name="telefono_doctor">Teléfono del doctor</string>
+    <string name="guardar">Guardar</string>
+    <string name="bluetooth_mac_address">Bluetooth MAC Address</string>
+    <string name="checando">Checando</string>
+    <string name="no_id">Error, ID no registrado en el servidor</string>
+</resources>

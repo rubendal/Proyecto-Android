@@ -40,7 +40,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
             params.put("id",String.valueOf(id));
 
             //Comprobar que ese id es valido
-            new PostAsyncTask(this,params,this,"Checando",true).execute(Servidor.Direccion("/doctor/config.php"));
+            new PostAsyncTask(this,params,this,getString(R.string.checando),true).execute(Servidor.Direccion("/doctor/config.php"));
 
         }catch(Exception e){
             Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show();
@@ -67,7 +67,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
 
             startActivity(new Intent(this,MainActivity.class));
         }else{
-            Toast.makeText(this,"Error, ID no registrado en servidor",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_id,Toast.LENGTH_SHORT).show();
         }
     }
 }
