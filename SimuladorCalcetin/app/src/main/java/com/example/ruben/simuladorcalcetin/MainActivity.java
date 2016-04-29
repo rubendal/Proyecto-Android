@@ -22,18 +22,19 @@ public class MainActivity extends AppCompatActivity {
     private String mac = "";
     private int diametro = 130;
     private int pasos = 40;
+    private BluetoothAsyncTask bluetoothAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        handler.post(b);
-        //handler.postDelayed(b,1000*60);
     }
 
     public void enviar(View view){
-        handler.removeCallbacks(b);
+        if(bluetoothAsyncTask!=null){
+            bluetoothAsyncTask.cancel(true);
+        }
         EditText d = (EditText)findViewById(R.id.diametro);
         EditText p = (EditText)findViewById(R.id.pasos);
         diametro = Integer.parseInt(d.getText().toString());
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         handler.removeCallbacks(b);
         handler.post(b);
         //handler.postDelayed(b,1000*60);
+        bluetoothAsyncTask = new BluetoothAsyncTask(bluetoothAdapter,diametro,pasos,mac);
+        bluetoothAsyncTask.execute();
 
     }
 
