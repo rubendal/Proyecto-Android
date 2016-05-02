@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.mike.apppaciente.AsyncMethod;
-import com.example.mike.apppaciente.GraficasActivity;
 import com.example.mike.apppaciente.Paciente;
 import com.example.mike.apppaciente.PostAsyncTask;
 import com.example.mike.apppaciente.Servidor;

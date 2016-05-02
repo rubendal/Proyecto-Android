@@ -45,10 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Graph.showGraph(this, R.id.graph2);
 
     }
-
-    public void activityGraficas(View view){
-        startActivity(new Intent(MainActivity.this, GraficasActivity.class));
-    }
+    
 
     public void activityEmergencia(View view){
 

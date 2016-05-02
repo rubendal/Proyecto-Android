@@ -22,8 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".GraficasActivity" />
-        <activity android:name=".EmergenciaActivity" />
 
         <service
             android:name=".AlarmService"
