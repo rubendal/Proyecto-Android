@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,12 +92,14 @@ public class ListaPacientesFragment extends ListFragment implements AsyncMethodA
                     pacientes.add(paciente);
                 }
             } catch (Exception e) {
-                Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
                 getActivity().getFragmentManager().popBackStack();
                 //getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido,new BienvenidaFragment()).commit();
             }
         }catch(Exception e){
-            Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
             getActivity().getFragmentManager().popBackStack();
             //getActivity().getFragmentManager().beginTransaction().replace(R.id.contenido,new BienvenidaFragment()).commit();*/
         }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Graph.showGraph(this, R.id.graph2);
 
     }
-    
+
 
     public void activityEmergencia(View view){
 

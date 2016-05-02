@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -52,13 +53,14 @@ public class Sesion implements AsyncMethod {
                     activity.startActivity(i);
                     activity.finish();
                 }else{
-                    Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(activity.findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-
+                Snackbar.make(activity.findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
             }
         }catch(Exception e){
-
+            Snackbar.make(activity.findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.represmash.appdoctor;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,14 +59,17 @@ public class AlertaFragment extends Fragment implements AsyncMethodActivity{
         try{
             int i = Integer.parseInt(res);
             if (i != -1) {
-                Toast.makeText(getActivity(), R.string.alerta_enviada, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.alerta_enviada, Snackbar.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.alerta_enviada, Toast.LENGTH_SHORT).show();
                 getActivity().getFragmentManager().popBackStack();
             } else {
-                Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
                 getActivity().getFragmentManager().popBackStack();
             }
         }catch(Exception e){
-            Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
             getActivity().getFragmentManager().popBackStack();
         }
     }

@@ -3,6 +3,7 @@ package com.example.represmash.appdoctor;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,11 +55,13 @@ public class RegistroFragment extends Fragment implements AsyncMethodActivity{
             if (paciente.isComplete()) {
                 new PostAsyncTask(getActivity(), paciente.generatePOSTParams(Sesion.ID), "Registrando paciente",this,true).execute(Servidor.Direccion("/doctor/registro.php"));
             }else {
-                Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.faltan_datos, Snackbar.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
                 //getActivity().getFragmentManager().popBackStack();
             }
         }catch(Exception e){
-            Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.faltan_datos, Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), R.string.faltan_datos, Toast.LENGTH_SHORT).show();
             //getActivity().getFragmentManager().popBackStack();
         }
 
@@ -70,14 +73,17 @@ public class RegistroFragment extends Fragment implements AsyncMethodActivity{
         try {
             int i = Integer.parseInt(res);
             if (i != -1) {
-                Toast.makeText(getActivity(), R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.paciente_registrado, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.paciente_registrado, Snackbar.LENGTH_SHORT).show();
                 getActivity().getFragmentManager().popBackStack();
             } else {
-                Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
                 getActivity().getFragmentManager().popBackStack();
             }
         } catch (Exception e) {
-            Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().findViewById(android.R.id.content), R.string.error, Snackbar.LENGTH_SHORT).show();
             getActivity().getFragmentManager().popBackStack();
         }
     }
