@@ -116,6 +116,10 @@ public class BluetoothAsyncTask extends AsyncTask<String,String,String> {
             if(socket!=null){
                 socket.close();
             }
+        }catch(Exception e){
+
+        }
+        try{
             if(server!=null){
                 server.close();
             }
@@ -123,5 +127,13 @@ public class BluetoothAsyncTask extends AsyncTask<String,String,String> {
 
         }
         super.onCancelled();
+    }
+
+    public void setDiametro(int diametro){
+        this.diametro = diametro;
+    }
+
+    public void setPasos(int pasos){
+        this.pasos = pasos;
     }
 }

@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         EditText p = (EditText)findViewById(R.id.pasos);
         diametro = Integer.parseInt(d.getText().toString());
         pasos = Integer.parseInt(p.getText().toString());
-        handler.removeCallbacks(b);
-        handler.post(b);
         //handler.postDelayed(b,1000*60);
         bluetoothAsyncTask = new BluetoothAsyncTask(bluetoothAdapter,diametro,pasos,mac);
         bluetoothAsyncTask.execute();
