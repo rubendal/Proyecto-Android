@@ -72,6 +72,7 @@ public class InitActivity extends AppCompatActivity implements AsyncMethod {
                                 editor.commit();
 
                                 startActivity(new Intent(ref,MainActivity.class));
+                                finish();
                             }else{
                                 Toast.makeText(ref, R.string.no_id,Toast.LENGTH_SHORT).show();
                             }
