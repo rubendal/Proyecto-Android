@@ -20,12 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InicioActivity" />
-        <activity android:name=".RegistroActivity" />
-        <activity android:name=".ListaPacientesActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".GraphActivity" />
-        <activity android:name=".AlertaActivity" />
         <activity
             android:name=".InitActivity"
             android:label="@string/title_activity_init"

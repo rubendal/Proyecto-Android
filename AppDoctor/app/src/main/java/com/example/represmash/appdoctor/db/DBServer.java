@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.represmash.appdoctor.AsyncMethod;
 import com.example.represmash.appdoctor.DescargarAsyncTask;
-import com.example.represmash.appdoctor.GraphActivity;
 import com.example.represmash.appdoctor.Paciente;
 import com.example.represmash.appdoctor.PostAsyncTask;
 import com.example.represmash.appdoctor.R;
