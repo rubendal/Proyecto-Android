@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter bluetoothAdapter;
     private final Handler handler = new Handler();
-    private String mac = "";
+    private String mac = "A8:7C:01:48:7D:1C";
     private int diametro = 130;
     private int pasos = 40;
     private BluetoothAsyncTask bluetoothAsyncTask;
