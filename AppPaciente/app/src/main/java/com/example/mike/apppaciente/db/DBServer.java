@@ -33,7 +33,7 @@ public class DBServer {
         db.open();
 
         ArrayList<Valor> valores = db.getAll();
-
+        db.close();
         for(Valor valor :valores){
             if(valor.getSubido()==0) { //Este valor no se a subido
                 UploadAsyncTask asyncTask = new UploadAsyncTask(context, valor, "Cargando", false);
@@ -41,7 +41,7 @@ public class DBServer {
             }
         }
 
-        db.close();
+
     }
 
 }

@@ -123,14 +123,15 @@ public class UploadAsyncTask extends AsyncTask<String, String, String> {
 
                 db.update(valor);
 
-
+                Log.e("Servidor","Se subio un dato");
                 db.close();
             }else{
+                Log.e("Servidor","No se subio un dato");
                 //No se subio el registro por lo que no lo modificamos en la base de datos
             }
 
         }catch(Exception e){
-
+            Log.e("Servidor","No se subio un dato por un error");
         }
     }
 

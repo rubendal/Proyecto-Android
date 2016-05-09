@@ -48,7 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void activityEmergencia(View view){
+        SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
 
+        Paciente.paciente = new Paciente(sharedPreferences.getString("nombre",""),sharedPreferences.getString("tel",""),sharedPreferences.getInt("edad",0),sharedPreferences.getInt("genero",0),
+                sharedPreferences.getString("nombre_emergencia",""),sharedPreferences.getString("telefono_emergencia",""));
+        Paciente.paciente.setId(sharedPreferences.getInt("id",0));
         if(Paciente.paciente != null) {
             if(!Paciente.paciente.getTelefono().isEmpty()) {
                 Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Paciente.paciente.getTelefono()));

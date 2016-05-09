@@ -16,7 +16,7 @@ import com.example.mike.apppaciente.db.DBServer;
  * Created by Ruben on 24/04/2016.
  */
 public class SubirReceiver extends BroadcastReceiver {
-    private long UPDATE = 1000 * 60 * 5;
+    private long UPDATE = 1000 * 60 * 1;
 
     @Override
     public void onReceive(final Context context, Intent intent)
